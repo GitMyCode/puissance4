@@ -1,7 +1,9 @@
+package Models;
+
 /**
  * Created by desk on 2/9/14.
  */
-public class Grid {
+public class Grid extends java.util.Observable {
 
     private int row;
     private int col;
@@ -10,6 +12,7 @@ public class Grid {
     public Grid(int row, int col){
         this.row = row;
         this.col = col;
+        create_grid();
     }
 
 

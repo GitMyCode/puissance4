@@ -17,6 +17,7 @@ public class Grid extends java.util.Observable {
 
 
     private void create_grid(){
+        grid = new Square[this.row][this.col];
         for (int i =0; i<row ; i++){
             for(int j=0; j<col; j++){
                 grid[i][j] = new Square();

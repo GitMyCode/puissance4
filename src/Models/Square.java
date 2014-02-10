@@ -20,6 +20,10 @@ public class Square  {
         this.status = status;
     }
 
+    public void incrementStatus(){
+        this.status++;
+        this.status%=3;
+    }
     public void setStatus(int status){
         this.status = status;
     }

@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
+
 import javax.swing.*;
 
 public class GameGrid extends JFrame implements java.util.Observer {
@@ -46,8 +47,20 @@ public class GameGrid extends JFrame implements java.util.Observer {
     }
 
 
+
     @Override
     public void update(Observable observable, Object o) {
+        int[] t = (int[]) o;
+        System.out.print("ici");
+        this.squares[t[0]].setText(String.valueOf(t[1]));
+           System.out.print(t[1]);
+    }
 
+
+    public JButton getSquareIndex(int index){
+        return this.squares[index];
+    }
+    public int getNbSquare(){
+        return nb_square;
     }
 }

@@ -18,7 +18,16 @@ public class GridController implements java.awt.event.ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.print("check");
+
+        Object obj = e.getSource();
+        for(int i=0;i<gameGrid.getNbSquare();i++){
+            if(obj == gameGrid.getSquareIndex(i)){
+
+                grid.changeSquare(i);
+
+            }
+        }
+
 
     }
 

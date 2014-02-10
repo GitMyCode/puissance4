@@ -51,9 +51,9 @@ public class GameGrid extends JFrame implements java.util.Observer {
     @Override
     public void update(Observable observable, Object o) {
         int[] t = (int[]) o;
-        System.out.print("ici");
+
         this.squares[t[0]].setText(String.valueOf(t[1]));
-           System.out.print(t[1]);
+
     }
 
 

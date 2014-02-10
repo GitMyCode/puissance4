@@ -19,7 +19,7 @@ public class GridController implements java.awt.event.ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.print("check");
-        
+
     }
 
     public void addModel(Grid g){

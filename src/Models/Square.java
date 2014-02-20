@@ -10,7 +10,7 @@ public class Square  {
     status = 1 = player1
     status = 2 = player2
     * */
-    int status =0;
+    int status = 2;
     public Square(){
 
     }
@@ -22,7 +22,7 @@ public class Square  {
 
     public void incrementStatus(){
         this.status++;
-        this.status%=3;
+        this.status%=2;
     }
     public void setStatus(int status){
         this.status = status;

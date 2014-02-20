@@ -1,6 +1,6 @@
 package Controllers;
 import Models.Grid;
-import Views.GameGrid;
+import Views.ViewGrid;
 
 import java.awt.event.ActionEvent;
 
@@ -13,17 +13,17 @@ public class Puissance4  implements java.awt.event.ActionListener {
         System.out.print("yo");
 
         //Cree le model grid
-        Grid my_grid = new Grid(6,7);
+        Grid model_grid = new Grid(6,7);
         //Cree la view sur grid
-        GameGrid view_grid = new GameGrid(6,7);
+        ViewGrid view_grid = new ViewGrid(6,7);
 
           //Le model est observer par la view
-        my_grid.addObserver(view_grid);
+        model_grid.addObserver(view_grid);
 
 
         //On cree maintenant le controller
         GridController gridController = new GridController();
-        gridController.addModel(my_grid); // lui passer le model
+        gridController.addModel(model_grid); // lui passer le model
         gridController.addView(view_grid);// lui passer la vue
 
         view_grid.addController(gridController);

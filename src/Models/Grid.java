@@ -30,13 +30,49 @@ public class Grid extends java.util.Observable {
         }
         */
     }
-    public void changeSquare(int index){
-        this.grid[index].incrementStatus();
-        int send[] = new int[2];
-        send[0] = index;
-        send[1] = this.grid[index].getStatus();
-        setChanged();
-        notifyObservers(send);
-    }
 
+    public void changeSquare(int index){
+
+        if (checkAvailibility(index)){
+            this.grid[index].incrementStatus();
+            int send[] = new int[2];
+            send[0] = index;
+            send[1] = this.grid[index].getStatus();
+            setChanged();
+            notifyObservers(send);
+
+        }
+
+     }
+
+    private boolean checkAvailibility(int index){
+        int south = index + this.col;
+        boolean check = false;
+
+        if (index > this.grid.length - this.col){
+            check = true;
+        }else if(this.grid[south].getStatus() != 2){
+            check = true;
+        }else{
+            check = false;
+        }
+
+      //  System.out.println(south + "  "+ this.grid.length + "  " + this.grid[south].getStatus());
+/*
+
+        if ((south > this.grid.length - this.col)){
+            check = true;
+            System.out.println("premier if");
+        }else if ( ){
+            check = true;
+            System.out.println("deuxieme if ");
+        }else {
+            check = false;
+            System.out.println("troisieme if ");
+        }
+*/
+
+
+        return check;
+    }
 }

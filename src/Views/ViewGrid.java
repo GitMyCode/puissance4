@@ -11,16 +11,16 @@ import java.util.Observable;
 
 import javax.swing.*;
 
-public class GameGrid extends JFrame implements java.util.Observer {
+public class ViewGrid extends JFrame implements java.util.Observer {
 
 
     JButton[] squares;
     JPanel panel;
     int nb_square;
-    public GameGrid(){
+    public ViewGrid(){
         setSize(200, 100);
          }
-    public GameGrid(int row,int col){
+    public ViewGrid(int row, int col){
        super("Puissance 4!");
         this.nb_square = row * col;
 
@@ -51,7 +51,7 @@ public class GameGrid extends JFrame implements java.util.Observer {
     @Override
     public void update(Observable observable, Object o) {
         int[] t = (int[]) o;
-
+        System.out.println(t[0]);
         this.squares[t[0]].setText(String.valueOf(t[1]));
 
     }

@@ -8,24 +8,21 @@ import java.util.ArrayList;
  */
 public class Player extends java.util.Observable {
 
-    private PlayerColor player_color;
+    private int player_color;
     private boolean turn; // si c'est a son tour ou non
     private String name;
     private ArrayList<Jetons> jetons;
 
-    public Player(PlayerColor color, String name){
+    public Player(int color, String name){
         this.player_color = color;
         this.name = name;
     }
 
     public void play(){
-        this.turn = true;
-        System.out.println(this.name);
 
-
-
-        notify();
-        this.turn= false;
+    }
+    public int getColor(){
+        return this.player_color;
     }
 
     public void setTurn(boolean turn){
@@ -35,6 +32,7 @@ public class Player extends java.util.Observable {
     public boolean getTurn(){
         return this.turn;
     }
+
 
 
 

@@ -1,7 +1,5 @@
 package Controllers;
-import Models.Grid;
-import Models.Player;
-import Models.PlayerColor;
+import Models.*;
 import Views.ViewGrid;
 
 import java.awt.*;
@@ -36,28 +34,10 @@ public class Puissance4 implements Runnable {
 
         PlayerColor jaune = new PlayerColor(1);
         PlayerColor rouge = new PlayerColor(0);
-         player1 = new Player(rouge,"player1");
-         player2 = new Player(jaune,"player2");
+         player1 = new Human(0,"player1");
+         player2 = new Ai(1,"player2");
 
-        gridController.addPlayer(player1,player2);
-
-/*
-       while(true){
-            player1.play();
-            try{
-                player1.wait();
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-
-             player2.play();
-           try{
-               player2.wait();
-           }catch (InterruptedException e){
-               e.printStackTrace();
-           }
-
-        }*/
+        gridController.addPlayers(player1,player2);
 
 
 

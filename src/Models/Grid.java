@@ -45,11 +45,14 @@ public class Grid extends java.util.Observable {
 
      }
 
-    private boolean checkAvailibility(int index){
+    public boolean checkAvailibility(int index){
         int south = index + this.col;
         boolean check = false;
         System.out.println("index = "+index +"  south= "+south);
-        if (index > this.grid.length - this.col-1){
+        if(this.grid[index].getStatus() != 2){
+            check = false;
+        }
+        else if (index > this.grid.length - this.col-1){
             check = true;
         }else if(this.grid[south].getStatus() != 2){
             check = true;

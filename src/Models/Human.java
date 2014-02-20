@@ -4,13 +4,16 @@ package Models;
  * Created by mb on 2/19/14.
  */
 public class Human extends Player {
-    public Human(PlayerColor color, String name) {
+    public Human(int color, String name) {
         super(color, name);
     }
 
     @Override
     public void play() {
         super.play();
+
+
+
     }
 
     @Override

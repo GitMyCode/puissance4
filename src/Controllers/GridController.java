@@ -16,7 +16,9 @@ public class GridController implements MouseListener{
 
     Grid grid;
     ViewGrid viewGrid;
-    Player[] player = new Player[2];
+
+    Player player1;
+    Player player2;
 
 
     public GridController(){}
@@ -55,11 +57,12 @@ public class GridController implements MouseListener{
     }
 
 
-    public void addPlayer(Player p, Player p2){
-        this.player[0] = p;
-        this.player[1] = p2;
-
+    public void addPlayers(Player p1, Player p2){
+        this.player1 = p1;
+        this.player2 = p2;
     }
+
+
 
     public void addView(ViewGrid gg){
         this.viewGrid = gg;
@@ -68,7 +71,15 @@ public class GridController implements MouseListener{
 
     }
 
+    private void changeTurn(){
+        player1.setTurn( !player1.getTurn());
+        player2.setTurn( !player2.getTurn());
+    }
 
+    private Player getCurrentPlayer(){
+
+        return player1.getTurn() ? player1 : player2;
+    }
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
@@ -79,25 +90,18 @@ public class GridController implements MouseListener{
         Object obj = mouseEvent.getSource();
         for(int i=0;i< viewGrid.getNbSquare();i++){
             if(obj == viewGrid.getSquareIndex(i)){
-                int joueurTurn = 0;
-                if (player[0].getTurn()){
-                    joueurTurn =0;
-                }else{
-                    joueurTurn = 1;
+
+                if(grid.checkAvailibility(i)){
+                    Player current = getCurrentPlayer();
+
+
+                    grid.changeSquare(i,current.getColor());
+
+                    changeTurn();
                 }
-
-                grid.changeSquare(i,joueurTurn);
-
-                player[joueurTurn].setTurn(false);
-                if(joueurTurn == 1){
-                    player[0].setTurn(true);
-                }else{
-                    player[1].setTurn(true);
-                }
-
-
             }
         }
+
     }
 
     @Override

@@ -6,6 +6,7 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 
 
@@ -14,7 +15,7 @@ import javax.swing.*;
 public class ViewGrid extends JFrame implements java.util.Observer {
 
 
-    JButton[] squares;
+    SquareView[] squares;
     JPanel panel;
     int nb_square;
     public ViewGrid(){
@@ -26,7 +27,7 @@ public class ViewGrid extends JFrame implements java.util.Observer {
 
         setSize(400,400);
          panel = new JPanel();
-        squares = new JButton[nb_square];
+        squares = new SquareView[nb_square];
 
         panel.setLayout(new GridLayout(row,col));
         for(int i =0; i<nb_square;i++){
@@ -40,9 +41,9 @@ public class ViewGrid extends JFrame implements java.util.Observer {
 
     }
 
-    public void addController(ActionListener c){
+    public void addController(MouseListener c){
         for(int i=0;i<nb_square; i++){
-            squares[i].addActionListener(c);
+            squares[i].addMouseListener(c);
         }
     }
 
@@ -52,12 +53,19 @@ public class ViewGrid extends JFrame implements java.util.Observer {
     public void update(Observable observable, Object o) {
         int[] t = (int[]) o;
         System.out.println(t[0]);
-        this.squares[t[0]].setText(String.valueOf(t[1]));
+        if (t[1] == 0){
+            this.squares[t[0]].setColor(Color.RED);
+        }else{
+            this.squares[t[0]].setColor(Color.YELLOW);
+        }
+
+
+       // this.squares[t[0]].setText(String.valueOf(t[1]));
 
     }
 
 
-    public JButton getSquareIndex(int index){
+    public JPanel getSquareIndex(int index){
         return this.squares[index];
     }
     public int getNbSquare(){

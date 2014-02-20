@@ -1,11 +1,17 @@
 package Models;
 
+import javax.swing.*;
+
 /**
  * Created by desk on 2/20/14.
  */
-public class Jetons {
+public class Jetons extends JPanel {
     private int index;
-    private PlayerColor color;
+
+    public Jetons(int index){
+        super();
+        this.index = index;
+    }
 
 
 }

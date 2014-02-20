@@ -31,10 +31,10 @@ public class Grid extends java.util.Observable {
         */
     }
 
-    public void changeSquare(int index){
+    public void changeSquare(int index,int playerTurn){
 
         if (checkAvailibility(index)){
-            this.grid[index].incrementStatus();
+            this.grid[index].incrementStatus(playerTurn);
             int send[] = new int[2];
             send[0] = index;
             send[1] = this.grid[index].getStatus();
@@ -48,8 +48,8 @@ public class Grid extends java.util.Observable {
     private boolean checkAvailibility(int index){
         int south = index + this.col;
         boolean check = false;
-
-        if (index > this.grid.length - this.col){
+        System.out.println("index = "+index +"  south= "+south);
+        if (index > this.grid.length - this.col-1){
             check = true;
         }else if(this.grid[south].getStatus() != 2){
             check = true;

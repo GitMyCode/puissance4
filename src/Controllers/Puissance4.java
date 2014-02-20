@@ -38,7 +38,11 @@ public class Puissance4 implements Runnable {
         PlayerColor rouge = new PlayerColor(0);
          player1 = new Player(rouge,"player1");
          player2 = new Player(jaune,"player2");
-       /*while(true){
+
+        gridController.addPlayer(player1,player2);
+
+/*
+       while(true){
             player1.play();
             try{
                 player1.wait();

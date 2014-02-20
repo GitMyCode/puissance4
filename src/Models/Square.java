@@ -20,9 +20,8 @@ public class Square  {
         this.status = status;
     }
 
-    public void incrementStatus(){
-        this.status++;
-        this.status%=2;
+    public void incrementStatus(int color){
+        this.status = color;
     }
     public void setStatus(int status){
         this.status = status;

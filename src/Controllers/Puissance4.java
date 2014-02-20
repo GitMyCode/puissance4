@@ -37,10 +37,9 @@ public class Puissance4 implements Runnable {
          player1 = new Human(0,"player1");
          player2 = new Ai(1,"player2");
 
-        gridController.addPlayers(player1,player2);
+        gridController.addPlayers(player1, player2);
 
-
-
+ 
 
 
 

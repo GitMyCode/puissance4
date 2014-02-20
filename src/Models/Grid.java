@@ -60,6 +60,64 @@ public class Grid extends java.util.Observable {
             check = false;
         }
 
+        return check;
+    }
+
+    public boolean checkWin(int color){
+        boolean check = false;
+        check = checkHorizontal(color);
+        if (!check) check = checkVertical(color);
+
+        return check;
+    }
+
+    private boolean checkHorizontal(int color){
+        boolean check = false;
+        int count =0;
+        for (int i =grid.length-1 ; i >= 0 && !check; i--){
+            if(((i+1) % 7) == 0){
+                count = 0;
+            }
+            if(grid[i].getStatus() == color){
+                count++;
+                check = (count == 4) ? true: false;
+            }else{
+                count= 0;
+            }
+        }
+        return check;
+    }
+    private boolean checkVertical(int color){
+        boolean check = false;
+        int count =0;
+        for (int j =0; j < col; j++){
+            for (int i =grid.length -j-1 ; i >= 0 && !check; i-=col){
+                if(grid[i].getStatus() == color){
+                    count++;
+                    check = (count == 4);
+                }else{
+                    count= 0;
+                }
+            }
+        }
+        return check;
+    }
+    private boolean checkDiag(int color ){
+        boolean check = false;
+        int count =0;
+        for (int j =0; j < col; j++){
+            for (int i =grid.length -j-1 ; i >= 0 && !check; i-=col-1){
+                if(grid[i].getStatus() == color){
+                    count++;
+                    check = (count == 4);
+                }else{
+                    count= 0;
+                }
+            }
+        }
+        return check;
+    }
+
       //  System.out.println(south + "  "+ this.grid.length + "  " + this.grid[south].getStatus());
 /*
 
@@ -76,6 +134,5 @@ public class Grid extends java.util.Observable {
 */
 
 
-        return check;
-    }
+
 }

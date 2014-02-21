@@ -1,13 +1,20 @@
 package Controllers;
 import Models.Grid;
+import Models.Player;
+import Models.PlayerColor;
 import Views.ViewGrid;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by desk on 2/9/14.
  */
-public class Puissance4  implements java.awt.event.ActionListener {
+public class Puissance4 implements Runnable {
+
+    private static Player player1;
+    private static Player player2;
 
     public static void main(String[] args){
         System.out.print("yo");
@@ -25,15 +32,57 @@ public class Puissance4  implements java.awt.event.ActionListener {
         GridController gridController = new GridController();
         gridController.addModel(model_grid); // lui passer le model
         gridController.addView(view_grid);// lui passer la vue
-
         view_grid.addController(gridController);
+
+        PlayerColor jaune = new PlayerColor(1);
+        PlayerColor rouge = new PlayerColor(0);
+         player1 = new Player(rouge,"player1");
+         player2 = new Player(jaune,"player2");
+       /*while(true){
+            player1.play();
+            try{
+                player1.wait();
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
+             player2.play();
+           try{
+               player2.wait();
+           }catch (InterruptedException e){
+               e.printStackTrace();
+           }
+
+        }*/
+
+
+
+
+
+
 
 
 
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        System.out.print("action dans Puissance4");
+    public void run() {
+        while(true){
+            player1.play();
+            try{
+                player1.wait();
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
+            player2.play();
+            try{
+                player2.wait();
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
+        }
+
     }
 }

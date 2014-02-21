@@ -6,9 +6,9 @@ package Models;
 public class Square  {
 
     /**
-    status = 0 = libre
-    status = 1 = player1
-    status = 2 = player2
+    status = 0 = rouge
+    status = 1 = jaune
+    status = 2 = libre
     * */
     int status = 2;
     public Square(){

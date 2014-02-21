@@ -30,7 +30,7 @@ public class ViewGrid extends JFrame implements java.util.Observer {
 
         panel.setLayout(new GridLayout(row,col));
         for(int i =0; i<nb_square;i++){
-            squares[i] = new JButton();
+            squares[i] = new SquareView();
             panel.add(squares[i]);
 
         }

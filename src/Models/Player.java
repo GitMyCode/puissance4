@@ -1,5 +1,6 @@
 package Models;
 
+
 /**
  * Created by desk on 2/9/14.
  */
@@ -12,6 +13,18 @@ public class Player extends java.util.Observable {
     public Player(PlayerColor color, String name){
         this.player_color = color;
         this.name = name;
+    }
+
+    public void play(){
+        this.turn = true;
+        System.out.println(this.name);
+
+
+        notify();
+        this.turn= false;
+
+
+
     }
 
 

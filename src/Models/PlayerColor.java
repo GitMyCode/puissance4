@@ -5,7 +5,7 @@ package Models;
  */
 public class PlayerColor {
 
-    private int color;
+    private int color; // 0 jaune 1 rouge
 
     public PlayerColor(int color){
         this.color = color;

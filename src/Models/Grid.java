@@ -48,7 +48,7 @@ public class Grid extends java.util.Observable {
     public boolean checkAvailibility(int index){
         int south = index + this.col;
         boolean check = false;
-        System.out.println("index = "+index +"  south= "+south);
+        System.out.print("\nindex = " + index + "  south= " + south);
         if(this.grid[index].getStatus() != 2){
             check = false;
         }
@@ -67,6 +67,7 @@ public class Grid extends java.util.Observable {
         boolean check = false;
         check = checkHorizontal(color);
         if (!check) check = checkVertical(color);
+        if (!check) check = checkDiag(color);
 
         return check;
     }
@@ -75,7 +76,7 @@ public class Grid extends java.util.Observable {
         boolean check = false;
         int count =0;
         for (int i =grid.length-1 ; i >= 0 && !check; i--){
-            if(((i+1) % 7) == 0){
+            if(((i+1) % col) == 0){
                 count = 0;
             }
             if(grid[i].getStatus() == color){
@@ -94,7 +95,7 @@ public class Grid extends java.util.Observable {
             for (int i =grid.length -j-1 ; i >= 0 && !check; i-=col){
                 if(grid[i].getStatus() == color){
                     count++;
-                    check = (count == 4);
+                    check = (count >= 4);
                 }else{
                     count= 0;
                 }
@@ -105,34 +106,44 @@ public class Grid extends java.util.Observable {
     private boolean checkDiag(int color ){
         boolean check = false;
         int count =0;
-        for (int j =0; j < col; j++){
-            for (int i =grid.length -j-1 ; i >= 0 && !check; i-=col-1){
-                if(grid[i].getStatus() == color){
-                    count++;
-                    check = (count == 4);
-                }else{
-                    count= 0;
-                }
+        int gauche = -1;
+        int droite = 1;
+
+        for (int i =grid.length -1 ; i >= 0 && !check; i--){
+            if(grid[i].getStatus() == color){
+                count = recurs_diag(1,color,i-col+gauche,gauche);
+                if (count != 4)
+                    count = recurs_diag(1,color,i-col+droite,droite);
+                check = count >=4;
             }
         }
+
         return check;
     }
+    private int recurs_diag(int count,int color,int next,int direction){
 
-      //  System.out.println(south + "  "+ this.grid.length + "  " + this.grid[south].getStatus());
-/*
+        int space_border;
+        if(count == 4)
+            return count;
 
-        if ((south > this.grid.length - this.col)){
-            check = true;
-            System.out.println("premier if");
-        }else if ( ){
-            check = true;
-            System.out.println("deuxieme if ");
-        }else {
-            check = false;
-            System.out.println("troisieme if ");
+        if (next <0)
+            return 0;
+
+        if(direction < 0){
+            space_border = (col - ((next+1) % col));
+           if (space_border >= count){
+                   if(this.grid[next].getStatus() == color)
+                     return  recurs_diag(count+1, color, next-col+direction, direction) ;
+           }
+        }else{
+            space_border =(col - (next % (col)) );
+            if ( space_border >= count){
+                 if(this.grid[next].getStatus() == color)
+                       return  recurs_diag(count+1, color, next-col+direction, direction);
+            }
         }
-*/
-
+        return count;
+    }
 
 
 }

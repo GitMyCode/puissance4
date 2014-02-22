@@ -39,6 +39,14 @@ public class SquareView extends JPanel {
     public void paint(Graphics g)
     {
         super.paint(g);
+
+        /*Wow cette affaire la donne antialiasing
+        * donc beaucoup plus beau*/
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+
         g.setColor(getColor());
         Dimension dim = getSize();
         g.fillOval(6, 6, dim.width -10, dim.height - 10);

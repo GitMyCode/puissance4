@@ -96,7 +96,6 @@ public class GridController implements MouseListener{
                     grid.changeSquare(i,current.getColor());
                     if(grid.checkWin(current.getColor())){
                         System.out.println("WIN");
-                        //System.exit(0);
                     }
 
                     changeTurn();

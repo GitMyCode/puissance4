@@ -128,8 +128,11 @@ public class Grid extends java.util.Observable {
 
         if (next <0)
             return 0;
-
-        space_border = (direction <0 ) ? (col - ((next+1) % col)) : (col - (next % (col)) );
+        //                               distance bordure droite    distance bordure gauche
+        space_border = (direction <0 ) ? (col - ((next+1) % col)) : (next % (col));
+        if(direction > 0){
+            System.out.println("space_order: "+space_border + " color: "+color+" next: "+next+" count "+count);
+        }
         if (space_border >= count){
                if(this.grid[next].getStatus() == color)
                  return  recurs_diag(count+1, color, next-col+direction, direction) ;

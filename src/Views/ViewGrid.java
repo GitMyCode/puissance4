@@ -46,22 +46,16 @@ public class ViewGrid extends JFrame implements java.util.Observer {
             squares[i].addMouseListener(c);
         }
     }
-
-
-
     @Override
     public void update(Observable observable, Object o) {
         int[] t = (int[]) o;
-        System.out.println(t[0]);
+       // System.out.println(t[0]);
         if (t[1] == 0){
             this.squares[t[0]].setColor(Color.RED);
         }else{
             this.squares[t[0]].setColor(Color.YELLOW);
         }
-
-
        // this.squares[t[0]].setText(String.valueOf(t[1]));
-
     }
 
 

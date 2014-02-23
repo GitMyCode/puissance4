@@ -48,7 +48,7 @@ public class Grid extends java.util.Observable {
     public boolean checkAvailibility(int index){
         int south = index + this.col;
         boolean check = false;
-        System.out.print("\nindex = " + index + "  south= " + south);
+      //  System.out.print("\nindex = " + index + "  south= " + south);
         if(this.grid[index].getStatus() != 2){
             check = false;
         }
@@ -129,19 +129,12 @@ public class Grid extends java.util.Observable {
         if (next <0)
             return 0;
 
-        if(direction < 0){
-            space_border = (col - ((next+1) % col));
-           if (space_border >= count){
-                   if(this.grid[next].getStatus() == color)
-                     return  recurs_diag(count+1, color, next-col+direction, direction) ;
-           }
-        }else{
-            space_border =(col - (next % (col)) );
-            if ( space_border >= count){
-                 if(this.grid[next].getStatus() == color)
-                       return  recurs_diag(count+1, color, next-col+direction, direction);
-            }
+        space_border = (direction <0 ) ? (col - ((next+1) % col)) : (col - (next % (col)) );
+        if (space_border >= count){
+               if(this.grid[next].getStatus() == color)
+                 return  recurs_diag(count+1, color, next-col+direction, direction) ;
         }
+
         return count;
     }
 

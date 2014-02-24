@@ -98,11 +98,24 @@ public class GridController implements MouseListener{
                         System.out.println("WIN :"+current.getColor());
 
                     changeTurn();
+
+                    /*
+                    while(currentPlayer.isReady() and !currenyPlayer.hasWin()){
+
+                        validMove = currentPlayer.play(index)
+                        if(currentPlayer.hasWin()){
+                            break;
+                        }
+                        if (validMove){
+                            currentPlayer = switch()
+                        }
+                        */
+                    }
                 }
             }
         }
 
-    }
+
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {

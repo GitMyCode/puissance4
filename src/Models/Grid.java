@@ -3,7 +3,7 @@ package Models;
 /**
  * Created by desk on 2/9/14.
  */
-public class Grid extends java.util.Observable {
+public class Grid extends java.util.Observable implements GridInterface {
 
     private int row;
     private int col;
@@ -40,7 +40,6 @@ public class Grid extends java.util.Observable {
             send[1] = this.grid[index].getStatus();
             setChanged();
             notifyObservers(send);
-
         }
 
      }

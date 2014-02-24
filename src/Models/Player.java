@@ -3,10 +3,12 @@ package Models;
 
 import java.util.ArrayList;
 
+import Models.Grid;
 /**
  * Created by desk on 2/9/14.
  */
-public class Player extends java.util.Observable {
+public abstract class Player extends java.util.Observable {
+
 
     private int player_color;
     private boolean turn; // si c'est a son tour ou non

@@ -9,9 +9,7 @@ public class Human extends Player {
     }
 
     @Override
-    public void play() {
-        super.play();
-
+    public void play(int index) {
 
 
     }

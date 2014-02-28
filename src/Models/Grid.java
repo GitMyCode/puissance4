@@ -8,13 +8,19 @@ public class Grid extends java.util.Observable implements GridInterface {
     private int row;
     private int col;
     private Square[] grid;
+    private static Grid instance = null;
 
-    public Grid(int row, int col){
+    public  Grid(int row, int col){
         this.row = row;
         this.col = col;
         create_grid();
+        instance = this;
     }
 
+    public static Grid getInstance(){
+
+        return instance;
+    }
 
     private void create_grid(){
         int nb_square = this.row * this.col;
@@ -41,7 +47,6 @@ public class Grid extends java.util.Observable implements GridInterface {
             setChanged();
             notifyObservers(send);
         }
-
      }
 
     public boolean checkAvailibility(int index){

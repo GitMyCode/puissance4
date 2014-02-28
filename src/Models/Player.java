@@ -14,13 +14,14 @@ public abstract class Player extends java.util.Observable {
     private boolean turn; // si c'est a son tour ou non
     private String name;
     private ArrayList<Jetons> jetons;
+    private Grid grid = Grid.getInstance();
 
     public Player(int color, String name){
         this.player_color = color;
         this.name = name;
     }
 
-    public void play(){
+    public void play(int index){
 
     }
     public int getColor(){

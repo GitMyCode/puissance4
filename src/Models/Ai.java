@@ -9,11 +9,11 @@ public class Ai extends Player {
     }
 
     @Override
-    public void play() {
-        super.play();
-
-
+    public void play(int index) {
+        super.play(index);
     }
+
+
 
     @Override
     public void setTurn(boolean turn) {

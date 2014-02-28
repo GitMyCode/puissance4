@@ -12,32 +12,33 @@ import java.util.Observable;
 
 import javax.swing.*;
 
-public class ViewGrid extends JFrame implements java.util.Observer {
+public class ViewGrid extends JPanel implements java.util.Observer {
 
 
     SquareView[] squares;
-    JPanel panel;
+    //JPanel panel;
     int nb_square;
     public ViewGrid(){
         setSize(200, 100);
          }
     public ViewGrid(int row, int col){
-       super("Puissance 4!");
+       super();
         this.nb_square = row * col;
 
-        setSize(400,400);
-         panel = new JPanel();
+        //setSize(400,400);
+       //  panel = new JPanel();
         squares = new SquareView[nb_square];
 
-        panel.setLayout(new GridLayout(row,col));
+        setLayout(new GridLayout(row,col));
         for(int i =0; i<nb_square;i++){
             squares[i] = new SquareView();
-            panel.add(squares[i]);
+            add(squares[i]);
 
         }
-        add(panel);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+
+
+       /* setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);*/
 
     }
 

@@ -9,7 +9,10 @@ import java.awt.event.MouseListener;
  */
 import Models.Grid;
 import Models.Player;  // Je ne penses pas que ca devrais etre la
+import Views.DialogView;
 import Views.ViewGrid;
+
+import javax.swing.*;
 
 public class GridController implements MouseListener{
 
@@ -19,6 +22,8 @@ public class GridController implements MouseListener{
 
     Player player1;
     Player player2;
+
+    DialogView dialogView = new DialogView();
 
 
     public GridController(){}
@@ -94,8 +99,13 @@ public class GridController implements MouseListener{
                 if(grid.checkAvailibility(i)){
                     Player current = getCurrentPlayer();
                     grid.changeSquare(i,current.getColor());
-                    if(grid.checkWin(current.getColor()))
+                    if(grid.checkWin(current.getColor())){
                         System.out.println("WIN :"+current.getColor());
+                        String player = (current.getColor() == 1)? "Player 1":"Player 2";
+                       // dialogView.setMessage(player);
+                        dialogView.showWin(player);
+                    }
+
 
                     changeTurn();
 

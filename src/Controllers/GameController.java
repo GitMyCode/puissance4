@@ -101,9 +101,16 @@ public class GameController implements MouseListener, ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
-        if(e.getActionCommand() == "Démarrer"){
+        if                  (e.getActionCommand() == "Démarrer"){
+
             System.out.println("ok");
             init();
+        }else if            (e.getActionCommand() == "Arrêter"){
+
+            System.out.println(" arreter");
+            init();
+
+
         }
 
 

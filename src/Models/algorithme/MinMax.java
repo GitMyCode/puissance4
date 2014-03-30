@@ -24,28 +24,12 @@ final static  int AI    = 1;
 
     public static int[] minmax(Grid grid, int depth,int player,int alpha,int beta) {//
 
-       /* int score= (evaluer(grid1));
-        if(score != 0 || grid1.isFull())
-            return new int[] {0,score } ;
-
-        int bestscore =0;
-        List<Integer> nextMove = getPossibleMoves(grid1);
-        for(int move : nextMove){
-            Grid newGrid = new Grid(grid1);
-            newGrid.cases[move] = player;
-            int temp= minmax(newGrid,2,player)[1];
-            bestscore = (bestscore > temp)? bestscore: temp;
-        }
-
-        if(player == AI){
 
 
-        }
-*/
-        int score= (evaluer(grid, player));
+       int score= (evaluer(grid, player));
         if(score != 0 || grid.isFull() || depth == 0){
-            System.out.print("-------------" +
-                    "\n" + score);
+           // System.out.print("-------------" +
+             //       "\n" + score);
            // grid1.show();
             int test =0;
             test = (score >0) ? depth : (test -depth);
@@ -73,7 +57,7 @@ final static  int AI    = 1;
                         for(int i=0;i<depth;i++){
                             System.out.print("  ");
                         }
-                        System.out.println("                      AI:"+ move);
+                        //System.out.println("                      AI:"+ move);
                     }
                 }else {
                     currentScore = minmax(newGrid,depth-1,AI,alpha,beta)[1];
@@ -83,7 +67,7 @@ final static  int AI    = 1;
                         for(int i=0;i<depth;i++){
                             System.out.print("  ");
                         }
-                        System.out.println("                      P:"+ move);
+                        //System.out.println("                      P:"+ move);
                     }
 
                 }

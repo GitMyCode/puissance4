@@ -2,6 +2,7 @@ package Views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Created by desk on 2/27/14.
@@ -19,6 +20,18 @@ public class ConfigurationView extends JFrame{
     private int placementType;
 
 
+    JLabel player1;
+    JLabel player2;
+
+    JRadioButton p1Ai;
+    JRadioButton p1Human;
+    JRadioButton p2Ai;
+    JRadioButton p2Human;
+
+    JRadioButton p1Turn;
+    JRadioButton p2Turn;
+
+
     JPanel configurationPanel;
 
 
@@ -29,12 +42,12 @@ public class ConfigurationView extends JFrame{
 
         JPanel te = new JPanel();
 
-        JLabel player1 = new JLabel("player1");
-        JLabel player2 = new JLabel("player2");
-        JRadioButton p1Ai = new JRadioButton("Ai");
-        JRadioButton p1Human = new JRadioButton("Human");
-        JRadioButton p2Ai = new JRadioButton("Ai");
-        JRadioButton p2Human = new JRadioButton("Human");
+        player1 = new JLabel("player1");
+        player2 = new JLabel("player2");
+        p1Ai = new JRadioButton("Ai");
+        p1Human = new JRadioButton("Human");
+        p2Ai = new JRadioButton("Ai");
+        p2Human = new JRadioButton("Human");
 
         ButtonGroup choicesType = new ButtonGroup();
         choicesType.add(p1Ai);
@@ -42,10 +55,10 @@ public class ConfigurationView extends JFrame{
 
 
 
-        JRadioButton p1Trun = new JRadioButton("Player 1");
-        JRadioButton p2Trun = new JRadioButton("Player 2");
+        p1Turn = new JRadioButton("Player 1");
+        p2Turn = new JRadioButton("Player 2");
         ButtonGroup groupTurn = new ButtonGroup();
-               groupTurn.add(p1Trun);groupTurn.add(p2Trun);
+               groupTurn.add(p1Turn);groupTurn.add(p2Turn);
 
        /* configurationPanel.add(player1);
         configurationPanel.add(p1Ai);
@@ -63,8 +76,8 @@ public class ConfigurationView extends JFrame{
 
 
         addItem(configurationPanel,new JLabel("Start first?"),0,3,1,1,GridBagConstraints.EAST);
-        addItem(configurationPanel,p1Trun,1,3,1,1,GridBagConstraints.WEST);
-        addItem(configurationPanel,p2Trun,2,3,1,1,GridBagConstraints.WEST);
+        addItem(configurationPanel,p1Turn,1,3,1,1,GridBagConstraints.WEST);
+        addItem(configurationPanel,p2Turn,2,3,1,1,GridBagConstraints.WEST);
 
 
 
@@ -124,8 +137,8 @@ public class ConfigurationView extends JFrame{
         add(configurationPanel);
 
 
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setVisible(true);
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
@@ -141,5 +154,11 @@ public class ConfigurationView extends JFrame{
         gc.fill = GridBagConstraints.NONE;
         p.add(c, gc);
     }
+
+    public void addController(ActionListener actionListener){
+
+
+    }
+
 
 }

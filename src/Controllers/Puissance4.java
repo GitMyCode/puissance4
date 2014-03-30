@@ -40,7 +40,7 @@ public class Puissance4  extends JFrame{
     public Puissance4(){
 
         super("Puissance 4");
-        setSize(450,520);
+        setSize(450,550);
 
         /*
         * Creer le Controller et le mettre au courant
@@ -62,6 +62,13 @@ public class Puissance4  extends JFrame{
 
 
 
+        /*
+        * Creer la vue pour les configuration et faire la liaison
+        * avec le Controller
+        * */
+        ConfigurationView config = new ConfigurationView();
+        cGameController.addViewConfiguration(config);
+        config.addController(cGameController);
 
         /**
         * Je dois passer la referance du Jframe afin que le cGameController
@@ -132,7 +139,6 @@ public class Puissance4  extends JFrame{
 
 
 
-        //ConfigurationView config = new ConfigurationView();
 */
     }
 

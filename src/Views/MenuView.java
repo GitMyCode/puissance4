@@ -42,5 +42,6 @@ public class MenuView extends JPanel{
     public void addController(ActionListener actionListener){
         demarrer.addActionListener(actionListener);
         arreter.addActionListener(actionListener);
+        configurer.addActionListener(actionListener);
     }
 }

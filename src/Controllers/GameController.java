@@ -12,6 +12,7 @@ import Models.Game;
 import Models.GameFactory;
 import Models.Grid;
 import Models.Options;
+import Views.ConfigurationView;
 import Views.DialogView;
 import Views.MenuView;
 import Views.ViewGrid;
@@ -32,6 +33,7 @@ public class GameController implements MouseListener, ActionListener{
 
     ViewGrid vGrid;
     MenuView vMenu;
+    ConfigurationView vConfiguration;
 
 
     DialogView vDialog = new DialogView();
@@ -75,6 +77,10 @@ public class GameController implements MouseListener, ActionListener{
     }
     public MenuView getViewMenu(){return this.vMenu;}
 
+    public void addViewConfiguration (ConfigurationView vConfiguration){
+        this.vConfiguration = vConfiguration;
+    }
+    public ConfigurationView getViewConfiguration(){return this.vConfiguration;}
 
 
 
@@ -125,6 +131,9 @@ public class GameController implements MouseListener, ActionListener{
             System.out.println(" arreter");
             reset();
 
+        }else if(e.getActionCommand() == "Configurer"){
+            System.out.println("COnfigurer");
+            vConfiguration.setVisible(true);
         }
 
     }

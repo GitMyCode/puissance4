@@ -44,7 +44,7 @@ public class ViewGrid extends JPanel implements java.util.Observer {
 
     public void addController(MouseListener c){
         for(int i=0;i<nb_square; i++){
-            squares[i].addMouseListener(c);
+        squares[i].addMouseListener(c);
         }
     }
     @Override

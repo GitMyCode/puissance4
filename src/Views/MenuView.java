@@ -1,18 +1,22 @@
 package Views;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.Event.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Created by desk on 2/23/14.
  */
-public class OptionsView extends JPanel{
+public class MenuView extends JPanel{
 
     private JButton demarrer;
     private JButton arreter;
     private JButton annuler;
     private JButton ouvrir;
     private JButton configurer;
-    public OptionsView(){
+    public MenuView(){
         super();
 
         demarrer = new JButton();
@@ -27,11 +31,15 @@ public class OptionsView extends JPanel{
         ouvrir.setText("Ouvrir");
         configurer.setText("Configurer");
 
-        OptionsView.this.add(demarrer);
-        OptionsView.this.add(arreter);
-        OptionsView.this.add(annuler);
-        OptionsView.this.add(ouvrir);
-        OptionsView.this.add(configurer);
+        MenuView.this.add(demarrer);
+        MenuView.this.add(arreter);
+        MenuView.this.add(annuler);
+        MenuView.this.add(ouvrir);
+        MenuView.this.add(configurer);
     }
 
+
+    public void addController(ActionListener mouseListener){
+        demarrer.addActionListener(mouseListener);
+    }
 }

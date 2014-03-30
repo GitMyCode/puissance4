@@ -13,14 +13,22 @@ public abstract class Player extends java.util.Observable {
     private String name;
     private Grid mGrid = Grid.getInstance();
 
-    public Player(int color, String name){
+    public Player(int color){
         this.player_color = color;
         this.name = name;
     }
 
-    public void play(int index){
-        mGrid.changeSquare(index,player_color);
-
+    /*
+    * Retourn False si la case n'est pas valide
+    * donc que le jouer n`a pas put faire son coup
+    * */
+    public boolean play(int index){
+        if(mGrid.checkAvailibility(index)){
+            mGrid.changeSquare(index,player_color);
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

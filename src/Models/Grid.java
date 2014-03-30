@@ -5,6 +5,10 @@ package Models;
  */
 public class Grid extends java.util.Observable implements GridInterface {
 
+    final int RED = 0;
+    final int YELLOW = 1;
+    final int FREE = 2;
+
     private int row;
     private int col;
     private Square[] grid;
@@ -15,6 +19,16 @@ public class Grid extends java.util.Observable implements GridInterface {
         this.col = col;
         create_grid();
         instance = this;
+    }
+
+    public Grid(Grid gridToCopy){
+        this.col = gridToCopy.getCol();
+        this.row = gridToCopy.getRow();
+        grid = new Square[gridToCopy.getLenght()];
+        for(int i=0; i< gridToCopy.getLenght(); i++){
+            grid[i] = new Square();
+            grid[i].setStatus(gridToCopy.getGrid()[i].getStatus());
+        }
     }
 
     public static Grid getInstance(){
@@ -74,6 +88,13 @@ public class Grid extends java.util.Observable implements GridInterface {
         if (!check) check = checkDiag(color);
 
         return check;
+    }
+    public boolean isFull(){
+        for(int i=0;i<grid.length; i++){
+            if(grid[i].getStatus()== FREE)
+                return false;
+        }
+        return true;
     }
 
     private boolean checkHorizontal(int color){
@@ -146,4 +167,23 @@ public class Grid extends java.util.Observable implements GridInterface {
     }
 
 
+    public int getLenght(){
+        return this.row * this.col;
+    }
+    public int getCol(){return this.col;}
+    public int getRow(){return this.row;}
+
+
+
+    public Square[] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Square[] grid) {
+        this.grid = grid;
+    }
+
+    public static void setInstance(Grid instance) {
+        Grid.instance = instance;
+    }
 }

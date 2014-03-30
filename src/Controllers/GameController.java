@@ -9,9 +9,9 @@ import java.awt.event.MouseListener;
  * Created by desk on 2/9/14.
  */
 import Models.Game;
+import Models.GameFactory;
 import Models.Grid;
 import Models.Options;
-import Models.Player;  // Je ne penses pas que ca devrais etre la
 import Views.DialogView;
 import Views.MenuView;
 import Views.ViewGrid;
@@ -22,17 +22,17 @@ public class GameController implements MouseListener, ActionListener{
     final int IN_GAME=3;
 
 
+    GameFactory factory;
     Grid mGrid;
     Options mOptions;
     Game mGame;
+    Puissance4 mFrame;
 
 
 
     ViewGrid vGrid;
     MenuView vMenu;
 
-    Player player1;
-    Player player2;
 
     DialogView vDialog = new DialogView();
 
@@ -60,6 +60,11 @@ public class GameController implements MouseListener, ActionListener{
     /*************************************
     * Getter setter Views
     **************************************/
+    public void addFrame(Puissance4 frame ){
+        this.mFrame = frame;
+    }
+    public Puissance4 getFrame(){return this.mFrame;}
+
     public void addViewGrid(ViewGrid vGrid){
         this.vGrid = vGrid;
     }
@@ -72,38 +77,38 @@ public class GameController implements MouseListener, ActionListener{
 
 
 
-    public void addModel(Grid g){
-        this.mGrid = g;
-    }
 
 
-    public void addPlayers(Player p1, Player p2){
-        this.player1 = p1;
-        this.player2 = p2;
-    }
-
-
-
-    public void addView(ViewGrid gg){
-        this.vGrid = gg;
-    }
+    /*TODO
+        Creer  le factory et lui passer les options la reference??
+        creer la view  -> prendre la reference
+        creer la grid  -> ne PAS prendre la reference
+        creer la grame -> prendre la reference
+    * */
     public void init(){
+        factory = new GameFactory(mOptions);
+        vGrid = factory.createGrid();
+        mGame = factory.createGame();
 
+
+
+
+        mFrame.add(vGrid) ;
+        vGrid.addController(this);
+        vGrid.updateUI();
     }
 
-    private void changeTurn(){
-        player1.setReady(!player1.getTurn());
-        player2.setReady(!player2.getTurn());
-    }
-
-    private Player getCurrentPlayer(){
-
-        return player1.getTurn() ? player1 : player2;
-    }
     @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
+        if(e.getActionCommand() == "Démarrer"){
+            System.out.println("ok");
+            init();
+        }
+
 
     }
+
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
@@ -112,68 +117,29 @@ public class GameController implements MouseListener, ActionListener{
         Object obj = mouseEvent.getSource();
         for(int i=0;i< vGrid.getNbSquare();i++){
             if(obj == vGrid.getSquareIndex(i)){
-
-                if(mGrid.checkAvailibility(i)){
-
+                System.out.println(i);
                     mGame.play(i);
+                    vGrid.updateUI();
                     if(mGame.getGameState() != IN_GAME){
 
                         String player = (mGame.getGameState()==0)? "Player 1":"Player 2";
                         vDialog.showWin(player);
                     }
-                    /*Player current = getCurrentPlayer();
-
-                    mGrid.changeSquare(i,current.getColor());
-                    if(mGrid.checkWin(current.getColor())){
-                        System.out.println("WIN :"+current.getColor());
-                        String player = (current.getColor() == 1)? "Player 1":"Player 2";
-                       // vDialog.setMessage(player);
-                        vDialog.showWin(player);
-                    }
-
-
-                    changeTurn();
-                    */
-                    /*
-                    while(currentPlayer.isReady() and !currenyPlayer.hasWin()){
-
-                        validMove = currentPlayer.play(index)
-                        if(currentPlayer.hasWin()){
-                            break;
-                        }
-                        if (validMove){
-                            currentPlayer = switch()
-                        }
-                        */
-                    }
-                }
             }
         }
-
+    }
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {}
 
 
     @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
+    public void mouseReleased(MouseEvent mouseEvent) {}
 
     @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
+    public void mouseEntered(MouseEvent mouseEvent) {}
 
     @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-        if(e.getActionCommand() == "Démarrer"){
-            System.out.println("ok");
-        }
+    public void mouseExited(MouseEvent mouseEvent) {}
 
 
-    }
 }

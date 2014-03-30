@@ -1,17 +1,19 @@
 package Models;
 
+import Models.algorithme.MinMax;
+
 /**
  * Created by mb on 2/19/14.
  */
 public class Ai extends Player {
-    public Ai(int color, String name) {
-        super(color, name);
+    public Ai(int color ) {
+        super(color);
     }
 
     @Override
-    public void play(int index) {
-        super.play(index);
-
+    public boolean play(int index) {
+        int move =MinMax.getMove(Grid.getInstance());
+       return super.play(move);
     }
 
     @Override
@@ -21,7 +23,7 @@ public class Ai extends Player {
 
     @Override
     public boolean isReadyToPlay() {
-        return super.isReadyToPlay();
+        return true; // Le AI est toujoru pres a jouer
     }
 
     @Override

@@ -20,11 +20,11 @@ public class Game {
     Player player2;
 
 
-    public Game(int p1,String p1_name, int p2,String p2_name, int startPlayer){
+    public Game(int p1, int p2, int startPlayer){
 
         this.gameState = IN_GAME;
-        player1 = (p1 == 1) ? new Ai(1,p1_name) : new Human(0,p1_name);
-        player2 = (p2 == 1) ? new Ai(1,p2_name) : new Human(1,p2_name);
+        player1 = (p1 == 1) ? new Ai(1) : new Human(0);
+        player2 = (p2 == 1) ? new Ai(1) : new Human(1);
 
         if(startPlayer==1){
             player1.setTurn(true);
@@ -33,14 +33,26 @@ public class Game {
             player1.setTurn(false);
             player2.setTurn(true);
         }
+
+
+        // Un check pour savoir si le Ai doit jouer en premier
+        if(getCurrentPlayer().getClass() == Ai.class){
+            System.out.println("Ai premier");
+            getCurrentPlayer().play(38); // l'index donner au AI n'a pas d'importance il ne s'en sert pas
+            changeTurn();
+        }
     }
 
 
     public void play(int index){
         Player current = getCurrentPlayer();
         do{
-
-            current.play(index);
+            System.out.println("Player :"+current.getColor());
+            //Si le coup est invalide( case deja occupe)
+            // le coup est annuler et on sort de la boucle
+            if(!current.play(index)){
+                break;
+            }
             current.setReady(false);
             if(current.hasWin()){
                 setGameState(current.getColor());

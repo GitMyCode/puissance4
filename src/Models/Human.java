@@ -8,15 +8,13 @@ public class Human extends Player{
 
 
 
-    public Human(int color, String name) {
-        super(color, name);
+    public Human(int color) {
+        super(color);
     }
 
     @Override
-    public void play(int index) {
-        super.play(index);
-
-
+    public boolean play(int index) {
+        return super.play(index);
     }
 
     @Override

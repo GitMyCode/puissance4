@@ -1,5 +1,6 @@
 package Controllers;
 import Models.*;
+import Views.ConfigurationView;
 import Views.MenuView;
 import Views.ViewGrid;
 
@@ -9,19 +10,78 @@ import java.awt.*;
 /**
  * Created by desk on 2/9/14.
  */
-public class Puissance4  {
+public class Puissance4  extends JFrame{
 
-    private static Player player1;
-    private static Player player2;
+    final static int AI =1;
+    final static int HUMAN =0;
 
-    private static Frame frame;
+
+   /*************************************
+    * Les models
+    **************************************/
+    private Options mOptions;
+
+
+   /*************************************
+    *  Les views
+    **************************************/
+    private ViewGrid vGrid;
+    private MenuView vMenu;
+    private ConfigurationView vConfiguration;
+
+
+   /*************************************
+    *  Le Controller
+    **************************************/
+   private GameController cGameController;
+
+     private static Frame frame;
 
     public Puissance4(){
 
+        super("Puissance 4");
+        setSize(450,520);
+
+        /*
+        * Creer le Controller et le mettre au courant
+        * des Options
+        * */
+        cGameController = new GameController();
+        mOptions = new Options();
+        cGameController.addModelOption(mOptions);
+
+
+        /**
+        * Creer la view du menu puis connecter le GameController
+        * avec celle-ci et l'ajouter le vMenu au JFrame
+        * */
+        vMenu = new MenuView();
+        add(vMenu, BorderLayout.SOUTH);
+        cGameController.addViewMenu(vMenu);
+        vMenu.addController(cGameController);
+
+
+
+
+        /**
+        * Je dois passer la referance du Jframe afin que le cGameController
+        * puisse ajouter les views qu'il cree au Jframe
+        * */
+        cGameController.addFrame(this);
+
+
+
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     public static void main(String[] args){
 
+        Puissance4 puissance4 = new Puissance4();
+
+
+/*
         frame = new JFrame("Puissance 4");
         frame.setSize(400,400);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,24 +116,24 @@ public class Puissance4  {
         view_grid.addController(gameController);
 
 
+        //TODO Game devrait etre creer par le controller
         Options options = new Options();
         Game game = new Game(0,"Player1",0,"Player2",1);
         gameController.addModelGame(game);
+
+
+
         gameController.addViewMenu(menuView);
         gameController.addModelOption(options);
         menuView.addController(gameController);
 
 
-        player1 = new Human(0,"player1");
-        player2 = new Ai(1,"player2");
 
 
-        //TODO   le gameController ne devrais pas avoir les players
-        gameController.addPlayers(player1, player2);
 
 
         //ConfigurationView config = new ConfigurationView();
-
+*/
     }
 
 }

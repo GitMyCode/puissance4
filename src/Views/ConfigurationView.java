@@ -10,6 +10,21 @@ import java.util.Enumeration;
  */
 public class ConfigurationView extends JFrame{
 
+    /*
+    *   Les actions commande pour que le controller sacher
+    *   quel radio button est choisi
+    *   Humain doit etre 0
+    *   AI doit etre 1
+    * */
+    final String action_AI = "1";
+    final String action_HUMAN = "0";
+    final String action_PLAYER1 = "1";
+    final String action_PLAYER2 = "2";
+    final String action_COULISSE= "COULISSE";
+    final String action_EXACT = "EXACT";
+
+
+
     private int player1Type;
     private int player2Type;
 
@@ -55,10 +70,13 @@ public class ConfigurationView extends JFrame{
         setSize(300,300);
         configurationPanel = new JPanel();
 
-        JPanel te = new JPanel();
-
+        /*
+        *   Creation des JButton JLabel Et ButtonGroup
+        */
         player1 = new JLabel("player1");
         player2 = new JLabel("player2");
+        JLabel lrow = new JLabel("row :");
+        JLabel lcol = new JLabel("column :");
 
         p1Ai = new JRadioButton("Ai");
         p1Human = new JRadioButton("Human");
@@ -66,22 +84,39 @@ public class ConfigurationView extends JFrame{
         p2Ai = new JRadioButton("Ai");
         p2Human = new JRadioButton("Human");
 
-        groupP1type = new ButtonGroup();
-        groupP1type.add(p1Ai);groupP1type.add(p1Human);
-
-        groupP2type = new ButtonGroup();
-        groupP2type.add(p2Ai);groupP2type.add(p2Human);
-
         p1Turn = new JRadioButton("Player 1");
         p2Turn = new JRadioButton("Player 2");
+
+       row = new JTextField(10);
+        col = new JTextField(10);
+
+        groupP1type = new ButtonGroup();
+        groupP2type = new ButtonGroup();
         groupTurn = new ButtonGroup();
-               groupTurn.add(p1Turn);groupTurn.add(p2Turn);
+        groupPlacement = new ButtonGroup();
 
-       /* configurationPanel.add(player1);
-        configurationPanel.add(p1Ai);
-        configurationPanel.add(p1Human);
-        configurationPanel.add(player2);*/
+        JLabel lplacementType = new JLabel("Type placement:");
+        coulisse = new JRadioButton("Coulisse");
+        exact = new JRadioButton("Exact");
 
+
+        ok = new JButton("Ok");
+        cancel = new JButton("Cancel");
+
+        /*
+        *   Lisaison des ButtonGroup avec les Button
+        * */
+        groupP1type.add(p1Ai);groupP1type.add(p1Human);
+        groupP2type.add(p2Ai);groupP2type.add(p2Human);
+        groupTurn.add(p1Turn);groupTurn.add(p2Turn);
+        groupPlacement.add(coulisse);groupPlacement.add(coulisse);
+
+
+        setActionCommande();
+
+        /*
+        *  Placement des component dans le JPanel
+        * */
         configurationPanel.setLayout(new GridBagLayout());
 
         addItem(configurationPanel,player1,0,0,1,1,GridBagConstraints.EAST);
@@ -98,10 +133,6 @@ public class ConfigurationView extends JFrame{
 
 
 
-        JLabel lrow = new JLabel("row :");
-        JLabel lcol = new JLabel("column :");
-        row = new JTextField(10);
-        col = new JTextField(10);
         addItem(configurationPanel,lrow,0,4,1,1,GridBagConstraints.WEST);
         addItem(configurationPanel,row,1,4,2,1,GridBagConstraints.WEST);
         addItem(configurationPanel,lcol,0,5,1,1,GridBagConstraints.WEST);
@@ -109,46 +140,13 @@ public class ConfigurationView extends JFrame{
 
 
 
-        JLabel lplacementType = new JLabel("Type placement:");
-        coulisse = new JRadioButton("Coulisse");
-        exact = new JRadioButton("Exact");
-        groupPlacement = new ButtonGroup();
-        groupPlacement.add(coulisse);groupPlacement.add(coulisse);
         addItem(configurationPanel,lplacementType,0,6,1,1,GridBagConstraints.EAST);
         addItem(configurationPanel,coulisse,1,6,1,1,GridBagConstraints.WEST);
         addItem(configurationPanel,exact,2,6,1,1,GridBagConstraints.WEST);
 
 
-        ok = new JButton("Ok");
-        cancel = new JButton("Cancel");
         addItem(configurationPanel,ok,0,7,1,1,GridBagConstraints.WEST);
         addItem(configurationPanel,cancel,1,7,1,1,GridBagConstraints.EAST);
-
-       /* Box sizeBox = Box.createVerticalBox();
-
-        JPanel psize =new JPanel();
-        psize.setSize(20,20);
-
-        psize.add(lrow);psize.add(row);psize.add(lcol);psize.add(col);
-        psize.setLayout(new BorderLayout(2,2));*/
-        /*addItem(psize, lrow, 0, 0, 1, 1, GridBagConstraints.NONE);
-        addItem(psize, row, 1, 0, 1, 1, GridBagConstraints.NONE);
-        addItem(psize,lcol,0,1,1,1,GridBagConstraints.NONE);
-        addItem(psize,col,1,1,1,1,GridBagConstraints.NONE);*/
-        //psize.setBorder(BorderFactory.createTitledBorder("Size"));
-       /* sizeBox.add(psize);
-        sizeBox.setBorder(BorderFactory.createTitledBorder("Size"));*/
-       //configurationPanel.add(psize);
-       // addItem(configurationPanel, psize, 0, 4, 6, 30, GridBagConstraints.NORTH);
-
-
-
-
-
-
-
-
-
 
 
         add(configurationPanel);
@@ -156,6 +154,20 @@ public class ConfigurationView extends JFrame{
 
         //setVisible(true);
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private void setActionCommande(){
+
+        p1Ai.setActionCommand(action_AI);
+        p1Human.setActionCommand(action_HUMAN);
+        p2Ai.setActionCommand(action_AI);
+        p2Human.setActionCommand(action_HUMAN);
+
+        coulisse.setActionCommand(action_COULISSE);
+        exact.setActionCommand(action_EXACT);
+
+        p1Turn.setActionCommand("1");
+        p2Turn.setActionCommand("2");
     }
 
 
@@ -173,11 +185,15 @@ public class ConfigurationView extends JFrame{
         p.add(c, gc);
     }
 
+    /*
+    * Prend un buttonGroup et retourn le ACTION_COMMANDE du RadioButton
+    * Selectionner
+    * */
     public String getSlectedButton(ButtonGroup buttonGroup){
         for(Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();){
             AbstractButton button = buttons.nextElement();
             if(button.isSelected()){
-                return button.getText();
+                return button.getActionCommand();
             }
         }
         return null;

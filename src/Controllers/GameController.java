@@ -18,6 +18,16 @@ import Views.MenuView;
 import Views.ViewGrid;
 
 public class GameController implements MouseListener, ActionListener{
+    /*
+    *   Les actions commande pour que le controller
+    *   sache  quel radio button est choisi dans la fenetre configuration
+    * */
+    final String action_AI = "AI";
+    final String action_HUMAN = "HUMAN";
+    final String action_PLAYER1 = "PLAYER1";
+    final String action_PLAYER2 = "PLAYER2";
+    final String action_COULISSE= "COULISSE";
+    final String action_EXACT = "EXACT";
 
 
     final int IN_GAME=3;
@@ -142,6 +152,7 @@ public class GameController implements MouseListener, ActionListener{
 
         else if( e.getActionCommand()== "Ok"){
             System.out.println(" ok");
+            syncToOption();
             vConf.setVisible(false);
         }else if ( e.getActionCommand()== "Cancel"){
             System.out.println("Cancel");
@@ -149,13 +160,29 @@ public class GameController implements MouseListener, ActionListener{
         }
 
     }
+    /*
+    * Prend les nouvelles configuration et les sauvegarde dans les options
+    * */
+    public void syncToOption(){
+
+        //Set l'option avec le action_commande du button selectionner dans le buttonGroup
+        mOptions.setPlayer1Type(Integer.parseInt(vConf.getSlectedButton(vConf.getGroupP1type())));
+        mOptions.setPlayer2Type(Integer.parseInt(vConf.getSlectedButton(vConf.getGroupP2type())));
+
+        mOptions.setStartingPlayer(Integer.parseInt(vConf.getSlectedButton(vConf.getGroupTurn())));
+
+        mOptions.setSizeX(Integer.parseInt(vConf.getRow().getText()));
+        mOptions.setSizeY(Integer.parseInt(vConf.getCol().getText()));
+
+        System.out.println(vConf.getSlectedButton(vConf.getGroupTurn()));
+    }
+
 
     /*
     * Va chercher les données dans Options et synchronise la vue Configuration
     * sur ces données
     * */
     public void syncFromOption(){
-
 
         // Pour le type du joueur 1 : AI ou Humain
         switch (mOptions.getPlayer1Type()){

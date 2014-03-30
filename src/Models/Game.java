@@ -24,7 +24,7 @@ public class Game {
 
         this.gameState = IN_GAME;
         player1 = (p1 == 1) ? new Ai(1) : new Human(0);
-        player2 = (p2 == 1) ? new Ai(1) : new Human(1);
+        player2 = (p2 == 1) ? new Ai(1) : new Human(0);
 
         if(startPlayer==1){
             player1.setTurn(true);

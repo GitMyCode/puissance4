@@ -97,6 +97,18 @@ public class GameController implements MouseListener, ActionListener{
         vGrid.addController(this);
         vGrid.updateUI();
     }
+    public void reset(){
+        mFrame.remove(vGrid);
+        vGrid.removeAll();
+        vGrid=null;
+        mGame=null;
+         vGrid = factory.createGrid();
+        mGame = factory.createGame();
+
+       mFrame.add(vGrid);
+        vGrid.addController(this);
+        vGrid.updateUI();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -108,7 +120,7 @@ public class GameController implements MouseListener, ActionListener{
         }else if            (e.getActionCommand() == "Arrêter"){
 
             System.out.println(" arreter");
-            init();
+            reset();
 
 
         }

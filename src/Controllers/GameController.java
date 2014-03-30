@@ -116,15 +116,16 @@ public class GameController implements MouseListener, ActionListener{
         if                  (e.getActionCommand() == "Démarrer"){
 
             System.out.println("ok");
-            init();
+
+          if(vGrid == null){
+              init();
+          }
         }else if            (e.getActionCommand() == "Arrêter"){
 
             System.out.println(" arreter");
             reset();
 
-
         }
-
 
     }
 

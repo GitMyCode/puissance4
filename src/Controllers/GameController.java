@@ -124,7 +124,6 @@ public class GameController implements MouseListener, ActionListener{
         Object obj = mouseEvent.getSource();
         for(int i=0;i< vGrid.getNbSquare();i++){
             if(obj == vGrid.getSquareIndex(i)){
-                System.out.println(i);
                     mGame.play(i);
                     vGrid.updateUI();
                     if(mGame.getGameState() != IN_GAME){

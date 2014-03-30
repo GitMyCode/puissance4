@@ -47,7 +47,6 @@ public class Game {
     public void play(int index){
         Player current = getCurrentPlayer();
         do{
-            System.out.println("Player :"+current.getColor());
             //Si le coup est invalide( case deja occupe)
             // le coup est annuler et on sort de la boucle
             if(!current.play(index)){

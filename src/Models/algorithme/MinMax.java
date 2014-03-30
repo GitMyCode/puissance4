@@ -55,7 +55,7 @@ final static  int AI    = 1;
                         bestMove = move;
 
                         for(int i=0;i<depth;i++){
-                            System.out.print("  ");
+                            //System.out.print("  ");
                         }
                         //System.out.println("                      AI:"+ move);
                     }
@@ -65,7 +65,7 @@ final static  int AI    = 1;
                         beta = currentScore;
                         bestMove = move;
                         for(int i=0;i<depth;i++){
-                            System.out.print("  ");
+                            //System.out.print("  ");
                         }
                         //System.out.println("                      P:"+ move);
                     }

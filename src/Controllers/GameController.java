@@ -21,7 +21,8 @@ public class GameController implements MouseListener, ActionListener{
 
 
     final int IN_GAME=3;
-
+    final int HUMAN = 0;
+    final int AI    = 1;
 
     GameFactory factory;
     Grid mGrid;
@@ -33,7 +34,7 @@ public class GameController implements MouseListener, ActionListener{
 
     ViewGrid vGrid;
     MenuView vMenu;
-    ConfigurationView vConfiguration;
+    ConfigurationView vConf;
 
 
     DialogView vDialog = new DialogView();
@@ -78,9 +79,9 @@ public class GameController implements MouseListener, ActionListener{
     public MenuView getViewMenu(){return this.vMenu;}
 
     public void addViewConfiguration (ConfigurationView vConfiguration){
-        this.vConfiguration = vConfiguration;
+        this.vConf = vConfiguration;
     }
-    public ConfigurationView getViewConfiguration(){return this.vConfiguration;}
+    public ConfigurationView getViewConfiguration(){return this.vConf;}
 
 
 
@@ -132,12 +133,52 @@ public class GameController implements MouseListener, ActionListener{
             reset();
 
         }else if(e.getActionCommand() == "Configurer"){
-            System.out.println("COnfigurer");
-            vConfiguration.setVisible(true);
+            System.out.println("Configurer");
+            syncOptionAndConfiguration();
+            vConf.setVisible(true);
+        }
+
+
+
+        else if( e.getActionCommand()== "Ok"){
+            System.out.println(" ok");
+            vConf.setVisible(false);
+        }else if ( e.getActionCommand()== "Cancel"){
+            System.out.println("Cancel");
+            vConf.setVisible(false);
         }
 
     }
 
+    public void syncOptionAndConfiguration(){
+
+
+        switch (mOptions.getPlayer1Type()){
+            case AI:     vConf.getGroupP1type().setSelected(vConf.getP1Ai().getModel(),true); break;
+            case HUMAN : vConf.getGroupP1type().setSelected(vConf.getP1Human().getModel(),true); break;
+        }
+
+        switch (mOptions.getPlayer2Type()){
+            case AI:     vConf.getGroupP2type().setSelected(vConf.getP2Ai().getModel(),true); break;
+            case HUMAN : vConf.getGroupP2type().setSelected(vConf.getP2Human().getModel(),true); break;
+        }
+
+
+        switch (mOptions.getStartingPlayer()){
+            case 1: vConf.getGroupTurn().setSelected(vConf.getP1Turn().getModel(),true); break;
+            case 2: vConf.getGroupTurn().setSelected(vConf.getP2Turn().getModel(),true); break;
+        }
+
+        vConf.getRow().setText(String.valueOf(mOptions.getSizeX()));
+        vConf.getCol().setText(String.valueOf(mOptions.getSizeY()));
+
+        if(mOptions.isAllowClickAbove()){
+            vConf.getGroupPlacement().setSelected(vConf.getCoulisse().getModel(),true);
+        }else{
+            vConf.getGroupPlacement().setSelected(vConf.getExact().getModel(),true);
+        }
+
+    }
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {

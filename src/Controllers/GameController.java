@@ -174,7 +174,9 @@ public class GameController implements MouseListener, ActionListener{
         mOptions.setSizeX(Integer.parseInt(vConf.getRow().getText()));
         mOptions.setSizeY(Integer.parseInt(vConf.getCol().getText()));
 
-        System.out.println(vConf.getSlectedButton(vConf.getGroupTurn()));
+        boolean clickAbove = (vConf.getSlectedButton(vConf.getGroupPlacement())==action_COULISSE);
+        mOptions.setAllowClickAbove(clickAbove);
+//        System.out.println(vConf.getSlectedButton(vConf.getGroupTurn()));
     }
 
 

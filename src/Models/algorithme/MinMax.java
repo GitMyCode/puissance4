@@ -18,7 +18,7 @@ final static  int AI    = 1;
 
     public static int getMove(Grid grid){
 
-        int[] play = minmax(grid,5,AI,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        int[] play = minmax(grid,4,AI,Integer.MIN_VALUE,Integer.MAX_VALUE);
         return play[0];
     }
 

@@ -1,4 +1,5 @@
-package Models;
+package Models.Player;
+import Models.*;
 
 
 /**
@@ -11,7 +12,7 @@ public abstract class Player extends java.util.Observable {
     private boolean ready;
     private boolean turn;// si c'est a son tour ou non
     private String name;
-    private Grid mGrid = Grid.getInstance();
+    GridFacadeInterface mGrid = null;
 
 
 
@@ -78,11 +79,11 @@ public abstract class Player extends java.util.Observable {
         this.nbCoup = nbCoup;
     }
 
-    public Grid getGrid() {
+    public GridFacadeInterface getGrid() {
         return mGrid;
     }
 
-    public void setGrid(Grid mGrid) {
+    public void setGrid(GridFacadeInterface mGrid) {
         this.mGrid = mGrid;
     }
 

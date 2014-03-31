@@ -1,6 +1,8 @@
 package Models;
 
-import com.sun.jndi.url.corbaname.corbanameURLContextFactory;
+import Models.Player.Ai;
+import Models.Player.Human;
+import Models.Player.Player;
 
 /**
  * Created by desk on 2/23/14.
@@ -21,7 +23,7 @@ public class Game {
 
 
 
-    public Game(int p1, int p2, int startPlayer){
+    public Game(int p1, int p2, int startPlayer, GridFacadeInterface mGrid){
 
         int playe1Color= (startPlayer ==1)? 0 : 1;
         int playe2Color= (startPlayer ==2)? 0 : 1;
@@ -36,6 +38,8 @@ public class Game {
             player1.setTurn(false);
             player2.setTurn(true);
         }
+        player1.setGrid(mGrid);
+        player2.setGrid(mGrid);
 
 
         // Un check pour savoir si le Ai doit jouer en premier

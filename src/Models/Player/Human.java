@@ -1,4 +1,6 @@
-package Models;
+package Models.Player;
+
+import Models.Grid;
 
 /**
  * Created by MB on 3/29/14.

@@ -12,6 +12,11 @@ public class GridFacade implements GridFacadeInterface {
         this.caretaker = new Caretaker();
     }
 
+    public GridFacade(int row, int col) {
+        this.grid = new Grid(row, col);
+        this.caretaker = new Caretaker();
+    }
+
     @Override
     public void reset() {
         Memento memento = caretaker.initialStateMemento();
@@ -43,6 +48,11 @@ public class GridFacade implements GridFacadeInterface {
     @Override
     public boolean checkAvailibility(int index) {
         return this.grid.checkAvailibility(index);
+    }
+
+    @Override
+    public void changeSquare(int index, int playerTurn) {
+        this.grid.changeSquare(index, playerTurn);
     }
 
     @Override

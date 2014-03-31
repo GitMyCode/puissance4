@@ -1,5 +1,6 @@
 package Models.algorithme;
 import Models.Grid;
+import Models.GridFacadeInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,13 @@ final static  int HUMAN = 0;
 final static  int AI    = 1;
 
 
-    public static int getMove(Grid grid){
+    public static int getMove(GridFacadeInterface grid){
 
         int[] play = minmax(grid,5,AI,Integer.MIN_VALUE,Integer.MAX_VALUE);
         return play[0];
     }
 
-    public static int[] minmax(Grid grid, int depth,int player,int alpha,int beta) {//
+    public static int[] minmax(GridFacadeInterface grid, int depth,int player,int alpha,int beta) {//
 
 
 
@@ -79,7 +80,7 @@ final static  int AI    = 1;
 
     }
 
-    private static List<Integer> getPossibleMoves(Grid grid){
+    private static List<Integer> getPossibleMoves(GridFacadeInterface grid){
         List<Integer> posMoves = new ArrayList<Integer>();
         for(int i=0 ; i<grid.getLenght(); i++){
             if(grid.checkAvailibility(i)){
@@ -89,7 +90,7 @@ final static  int AI    = 1;
         return posMoves;
     }
 
-    private static int evaluer(Grid grid,int turn){
+    private static int evaluer(GridFacadeInterface grid,int turn){
         if(grid.checkWin(turn)){
             if(turn==HUMAN){
                 return -10;

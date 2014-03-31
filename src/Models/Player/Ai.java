@@ -1,4 +1,4 @@
-package Models;
+package Models.Player;
 
 import Models.algorithme.MinMax;
 
@@ -12,7 +12,7 @@ public class Ai extends Player {
 
     @Override
     public boolean play(int index) {
-        int move =MinMax.getMove(Grid.getInstance());
+        int move =MinMax.getMove(this.mGrid);
        return super.play(move);
     }
 

@@ -11,9 +11,13 @@ public interface GridFacadeInterface {
     void loadPreviousState();
     boolean existsPreviousState();
 
+
     boolean checkWin(int color);
     boolean checkAvailibility(int index);
+
+    void changeSquare(int index,int playerTurn);
     void sendChange();
+
     int getLenght();
     int getCol();
     int getRow();

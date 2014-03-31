@@ -10,7 +10,7 @@ public class GameFactory {
     Options mOptions;
     ViewGrid vGrid;
 
-    GridInterface mGrid;
+    GridFacadeInterface mGrid;
     Game mGame;
 
     public GameFactory(Options mOptions){
@@ -20,7 +20,7 @@ public class GameFactory {
 
     public ViewGrid createGrid(){
         vGrid = new ViewGrid(mOptions.getSizeX(),mOptions.getSizeY());
-        mGrid = new Grid(mOptions.getSizeX(),mOptions.getSizeY()) ;
+        mGrid = new GridFacade(mOptions.getSizeX(),mOptions.getSizeY()) ;
 
         // Lie l'oberver vGrid avec l'objet mGrid
         mGrid.addObserver(vGrid);
@@ -31,7 +31,7 @@ public class GameFactory {
     public Game createGame(){
        mGame = new Game(mOptions.getPlayer1Type(),
                         mOptions.getPlayer2Type(),
-                        mOptions.getStartingPlayer());
+                        mOptions.getStartingPlayer(), mGrid);
 
         return mGame;
     }

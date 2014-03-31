@@ -13,6 +13,8 @@ public class Grid extends java.util.Observable implements GridInterface {
     private int col;
     private Square[] grid;
 
+    private  int[] resultat = new int[4];
+
     public  Grid(int row, int col){
         this.row = row;
         this.col = col;
@@ -112,20 +114,30 @@ public class Grid extends java.util.Observable implements GridInterface {
                 count= 0;
             }
         }
+        if(check)
+            System.out.println("Horizontal");
         return check;
     }
     private boolean checkVertical(int color){
         boolean check = false;
-        int count =0;
         for (int j =0; j < col; j++){
+            int count =0;
             for (int i =grid.length -j-1 ; i >= 0 && !check; i-=col){
                 if(grid[i].getStatus() == color){
+                    resultat[count]= i;
                     count++;
                     check = (count >= 4);
                 }else{
                     count= 0;
                 }
             }
+        }
+        if(check){
+            System.out.println("Vertical");
+            for(int i=0;i<4;i++){
+                System.out.print(resultat[i] + " ");
+            }
+            System.out.println();
         }
         return check;
     }
@@ -144,13 +156,25 @@ public class Grid extends java.util.Observable implements GridInterface {
             }
         }
 
+        if(check){
+            System.out.println("diagonal");
+            for(int i=0;i<4;i++){
+                System.out.print(resultat[i]+ " ");
+            }
+            System.out.println();
+            System.out.println();
+        }
+
+
         return check;
     }
     private int recurs_diag(int count,int color,int next,int direction){
 
         int space_border;
-        if(count == 4)
+        if(count == 4){
+            resultat[count-1] = next;
             return count;
+        }
 
         if (next <0)
             return 0;
@@ -160,8 +184,10 @@ public class Grid extends java.util.Observable implements GridInterface {
             //System.out.println("space_order: "+space_border + " color: "+color+" next: "+next+" count "+count);
         }
         if (space_border >= count){
-               if(this.grid[next].getStatus() == color)
-                 return  recurs_diag(count+1, color, next-col+direction, direction) ;
+               if(this.grid[next].getStatus() == color){
+                   resultat[count-1] = next;
+                   return  recurs_diag(count+1, color, next-col+direction, direction) ;
+               }
         }
 
         return count;

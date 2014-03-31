@@ -20,6 +20,7 @@ public class Game {
     Player player2;
 
 
+
     public Game(int p1, int p2, int startPlayer){
 
         this.gameState = IN_GAME;
@@ -63,6 +64,11 @@ public class Game {
 
 
     }
+
+    public void Undo(){
+        player1.Undo();
+    }
+
 
     private Player getCurrentPlayer(){
         return player1.getTurn() ? player1 : player2;

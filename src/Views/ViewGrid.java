@@ -50,12 +50,26 @@ public class ViewGrid extends JPanel implements java.util.Observer {
     @Override
     public void update(Observable observable, Object o) {
         int[] t = (int[]) o;
+
+        for(int i=0;i<t.length;i++){
+            Color square_color;
+            if(t[i] == 0){
+                squares[i].setColor(Color.RED);
+            }else if(t[i] ==1){
+                squares[i].setColor(Color.YELLOW);
+            }else{
+                squares[i].setColor(Color.WHITE);
+            }
+
+        }
        // System.out.println(t[0]);
+/*
         if (t[1] == 0){
             this.squares[t[0]].setColor(Color.RED);
         }else{
             this.squares[t[0]].setColor(Color.YELLOW);
         }
+        */
        // this.squares[t[0]].setText(String.valueOf(t[1]));
     }
 

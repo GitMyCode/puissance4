@@ -43,5 +43,6 @@ public class MenuView extends JPanel{
         demarrer.addActionListener(actionListener);
         arreter.addActionListener(actionListener);
         configurer.addActionListener(actionListener);
+        annuler.addActionListener(actionListener);
     }
 }

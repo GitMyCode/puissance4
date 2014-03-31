@@ -55,13 +55,27 @@ public class Grid extends java.util.Observable implements GridInterface {
 
         if (checkAvailibility(index)){
             this.grid[index].incrementStatus(playerTurn);
+
+/*
             int send[] = new int[2];
             send[0] = index;
             send[1] = this.grid[index].getStatus();
             setChanged();
             notifyObservers(send);
+            */
+            sendChange();
         }
-     }
+    }
+    public void sendChange(){
+        int send[] = new int[this.grid.length];
+        for(int i=0;i<this.grid.length;i++){
+            send[i] = this.grid[i].getStatus();
+        }
+        setChanged();
+        notifyObservers(send);
+
+    }
+
 
     public boolean checkAvailibility(int index){
         int south = index + this.col;

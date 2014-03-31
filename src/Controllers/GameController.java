@@ -8,10 +8,7 @@ import java.awt.event.MouseListener;
 /**
  * Created by desk on 2/9/14.
  */
-import Models.Game;
-import Models.GameFactory;
-import Models.Grid;
-import Models.Options;
+import Models.*;
 import Views.ConfigurationView;
 import Views.DialogView;
 import Views.MenuView;
@@ -34,23 +31,25 @@ public class GameController implements MouseListener, ActionListener{
     final int HUMAN = 0;
     final int AI    = 1;
 
-    GameFactory factory;
-    Grid mGrid;
-    Options mOptions;
-    Game mGame;
-    Puissance4 mFrame;
+   private GameFactory factory;
+   private Grid mGrid;
+   private Options mOptions;
+   private Game mGame;
+   private Puissance4 mFrame;
 
 
 
-    ViewGrid vGrid;
-    MenuView vMenu;
-    ConfigurationView vConf;
+    private ViewGrid vGrid;
+    private MenuView vMenu;
+    private ConfigurationView vConf;
 
 
-    DialogView vDialog = new DialogView();
+    private DialogView vDialog = new DialogView();
 
 
-    public GameController(){}
+    public GameController(){
+
+    }
 
 
     /*************************************
@@ -130,32 +129,35 @@ public class GameController implements MouseListener, ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
-        if                  (e.getActionCommand() == "Démarrer"){
+        if (e.getActionCommand() == "Démarrer"){
 
-            System.out.println("ok");
 
           if(vGrid == null){
               init();
           }
-        }else if            (e.getActionCommand() == "Arrêter"){
+        }else if(e.getActionCommand() == "Arrêter"){
 
-            System.out.println(" arreter");
             reset();
 
         }else if(e.getActionCommand() == "Configurer"){
-            System.out.println("Configurer");
             syncFromOption();
             vConf.setVisible(true);
         }
 
+        else if(e.getActionCommand() == "Annuler"){
+
+               mGame.Undo();
+               vGrid.updateUI();
+
+        }
 
 
-        else if( e.getActionCommand()== "Ok"){
-            System.out.println(" ok");
+        else if(e.getActionCommand()== "Ok"){
+
             syncToOption();
             vConf.setVisible(false);
         }else if ( e.getActionCommand()== "Cancel"){
-            System.out.println("Cancel");
+
             vConf.setVisible(false);
         }
 
@@ -181,8 +183,8 @@ public class GameController implements MouseListener, ActionListener{
 
 
     /*
-    * Va chercher les données dans Options et synchronise la vue Configuration
-    * sur ces données
+    * Va chercher les données dans mOptions et synchronise la vue Configuration
+    * sur ces données vers vConf
     * */
     public void syncFromOption(){
 
@@ -217,6 +219,10 @@ public class GameController implements MouseListener, ActionListener{
 
     }
 
+
+    /*
+    * Est appeler lorsque l'utilisateur click sur la grille
+    * */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
@@ -234,16 +240,15 @@ public class GameController implements MouseListener, ActionListener{
             }
         }
     }
+
+
+
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {}
-
-
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {}
-
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {}
-
     @Override
     public void mouseExited(MouseEvent mouseEvent) {}
 

@@ -13,6 +13,14 @@ public abstract class Player extends java.util.Observable {
     private String name;
     private Grid mGrid = Grid.getInstance();
 
+
+     private int nbCoup = 0;
+
+    Caretaker caretaker = new Caretaker();
+    Originator originator = new Originator();
+
+
+
     public Player(int color){
         this.player_color = color;
         this.name = name;
@@ -25,12 +33,25 @@ public abstract class Player extends java.util.Observable {
     public boolean play(int index){
         if(mGrid.checkAvailibility(index)){
             mGrid.changeSquare(index,player_color);
+            nbCoup++;
+            originator.set(mGrid.getGrid());
+            caretaker.addMemento(originator.storeInMemento());
+
             return true;
         }else{
             return false;
         }
     }
 
+    public void Undo(){
+
+        if(nbCoup>0){
+            nbCoup--;
+            mGrid.setGrid(caretaker.getMemento(nbCoup).getMementoSave());
+            mGrid.sendChange();
+        }
+
+    }
 
     public boolean hasWin(){
         return mGrid.checkWin(player_color);

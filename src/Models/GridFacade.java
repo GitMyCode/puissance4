@@ -49,7 +49,7 @@ public class GridFacade implements GridFacadeInterface {
 
     @Override
     public boolean checkWin(int color) {
-        return false;
+        return grid.checkWin(color);
     }
 
     @Override

@@ -74,10 +74,11 @@ public class Game {
     public void Undo(){
 
         getCurrentPlayer().Undo();
+
+        changeTurn();
        if(getCurrentPlayer().getClass() == Ai.class){
             changeTurn();
         }
-        changeTurn();
     }
 
 

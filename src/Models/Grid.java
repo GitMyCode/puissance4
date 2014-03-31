@@ -23,7 +23,7 @@ public class Grid extends java.util.Observable implements GridInterface {
         Grid copiedGrid = new Grid(this.row, this.col);
 
         Square[] copiedSquares = new Square[this.grid.length];
-        for(int i=0; i< copiedGrid.getLenght(); i++){
+        for(int i=0; i< this.grid.length; i++){
             copiedSquares[i] = new Square();
             copiedSquares[i].setStatus(this.grid[i].getStatus());
         }

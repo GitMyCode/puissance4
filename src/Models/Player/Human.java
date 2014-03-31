@@ -20,10 +20,10 @@ public class Human extends Player{
     @Override
     public boolean play(int index) {
         if(getGrid().checkAvailibility(index)){
+            getGrid().saveState();
             getGrid().changeSquare(index, getColor());
 
             nbCoup++;
-            getGrid().saveState();
             return true;
         }else{
             return false;

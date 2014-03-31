@@ -32,7 +32,7 @@ public class GameController implements MouseListener, ActionListener{
     final int AI    = 1;
 
    private GameFactory factory;
-   private Grid mGrid;
+   private GridFacadeInterface mGrid;
    private Options mOptions;
    private Game mGame;
    private Puissance4 mFrame;
@@ -55,10 +55,10 @@ public class GameController implements MouseListener, ActionListener{
     /*************************************
     * Getter setter models
     **************************************/
-    public void addModelGrid(Grid g){
+    public void addModelGrid(GridFacadeInterface g){
         this.mGrid = g;
     }
-    public Grid getModelGrid(){return this.mGrid;}
+    public GridFacadeInterface getModelGrid(){return this.mGrid;}
 
     public void addModelOption(Options options){
        this.mOptions = options ;

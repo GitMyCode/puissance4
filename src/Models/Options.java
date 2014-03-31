@@ -27,7 +27,7 @@ public class Options {
         allowClickAbove =false;
         player1Type = HUMAN;
         player2Type = AI;
-        startingPlayer = 2;
+        startingPlayer = 1;
         sizeX = 7;
         sizeY = 6;
 

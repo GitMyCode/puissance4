@@ -47,7 +47,7 @@ final static  int AI    = 1;
             return  new int[] {bestMove,bestScore};
         }*/
            for(int move : nextMove){
-                Grid newGrid = new Grid(grid);
+                GridFacadeInterface newGrid = grid.copyGridFacade();
                 newGrid.changeSquare(move,player);
                 if(player == AI){
                     currentScore = minmax(newGrid,depth-1,HUMAN, alpha,beta)[1];

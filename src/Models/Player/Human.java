@@ -1,6 +1,7 @@
 package Models.Player;
 
 import Models.Grid;
+import Models.GridFacadeInterface;
 
 /**
  * Created by MB on 3/29/14.
@@ -22,8 +23,7 @@ public class Human extends Player{
             getGrid().changeSquare(index, getColor());
 
             nbCoup++;
-            originator.set(getGrid().getSquareGrid());
-            caretaker.addMemento(originator.storeInMemento());
+            getGrid().saveState();
             return true;
         }else{
             return false;
@@ -32,10 +32,10 @@ public class Human extends Player{
 
     @Override
     public void Undo() {
-        if(nbCoup>0){
+        if(mGrid.existsPreviousState()){
             System.out.println("Undo :"+getColor());
             nbCoup--;
-            getGrid().setGrid(caretaker.getMemento().getMementoSave());
+            getGrid().loadPreviousState();
             getGrid().sendChange();
         }
     }
@@ -71,7 +71,7 @@ public class Human extends Player{
     }
 
     @Override
-    public Grid getGrid() {
+    protected GridFacadeInterface getGrid() {
         return super.getGrid();
     }
 

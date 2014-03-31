@@ -79,7 +79,7 @@ public abstract class Player extends java.util.Observable {
         this.nbCoup = nbCoup;
     }
 
-    public GridFacadeInterface getGrid() {
+    protected GridFacadeInterface getGrid() {
         return mGrid;
     }
 

@@ -12,7 +12,7 @@ public class Ai extends Player {
 
     @Override
     public boolean play(int index) {
-        int move =MinMax.getMove(this.mGrid);
+        int move =MinMax.getMove(super.mGrid);
        return super.play(move);
     }
 

@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Observer;
+
 /**
  * Created by mb on 2/23/14.
  */
@@ -10,6 +12,7 @@ public interface GridFacadeInterface {
     void saveState();
     void loadPreviousState();
     boolean existsPreviousState();
+    void addObserver(Observer observer);
 
 
     boolean checkWin(int color);

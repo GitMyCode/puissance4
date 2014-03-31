@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Observer;
+
 /**
  * Created by desk on 2/9/14.
  */
@@ -38,6 +40,11 @@ public class GridFacade implements GridFacadeInterface {
     @Override
     public boolean existsPreviousState() {
         return this.caretaker.existPreviousMemento();
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        grid.addObserver(observer);
     }
 
     @Override

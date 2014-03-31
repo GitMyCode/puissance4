@@ -1,16 +1,17 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Created by MB on 3/30/14.
  */
 public class Caretaker {
 
-    ArrayList<Memento> savedGrids = new ArrayList<Memento>();
+    Stack<Memento> savedGrids = new Stack<Memento>();
 
-    public void addMemento(Memento m ){savedGrids.add(m);}
+    public void addMemento(Memento m ){savedGrids.push(m);}
 
-    public Memento getMemento(int index){return savedGrids.get(index);}
+    public Memento getMemento(){return savedGrids.pop();}
 
 }

@@ -7,6 +7,8 @@ public class Human extends Player{
 
 
 
+     private int nbCoup =0;
+
 
     public Human(int color) {
         super(color);
@@ -14,7 +16,26 @@ public class Human extends Player{
 
     @Override
     public boolean play(int index) {
-        return super.play(index);
+        if(getGrid().checkAvailibility(index)){
+            getGrid().changeSquare(index, getColor());
+
+            nbCoup++;
+            originator.set(getGrid().getSquareGrid());
+            caretaker.addMemento(originator.storeInMemento());
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public void Undo() {
+        if(nbCoup>0){
+            System.out.println("Undo :"+getColor());
+            nbCoup--;
+            getGrid().setGrid(caretaker.getMemento().getMementoSave());
+            getGrid().sendChange();
+        }
     }
 
     @Override
@@ -46,4 +67,11 @@ public class Human extends Player{
     public boolean getTurn() {
         return super.getTurn();
     }
+
+    @Override
+    public Grid getGrid() {
+        return super.getGrid();
+    }
+
+
 }

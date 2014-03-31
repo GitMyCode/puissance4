@@ -14,7 +14,9 @@ public abstract class Player extends java.util.Observable {
     private Grid mGrid = Grid.getInstance();
 
 
-     private int nbCoup = 0;
+
+
+    private int nbCoup = 0;
 
     Caretaker caretaker = new Caretaker();
     Originator originator = new Originator();
@@ -33,9 +35,6 @@ public abstract class Player extends java.util.Observable {
     public boolean play(int index){
         if(mGrid.checkAvailibility(index)){
             mGrid.changeSquare(index,player_color);
-            nbCoup++;
-            originator.set(mGrid.getGrid());
-            caretaker.addMemento(originator.storeInMemento());
 
             return true;
         }else{
@@ -45,11 +44,6 @@ public abstract class Player extends java.util.Observable {
 
     public void Undo(){
 
-        if(nbCoup>0){
-            nbCoup--;
-            mGrid.setGrid(caretaker.getMemento(nbCoup).getMementoSave());
-            mGrid.sendChange();
-        }
 
     }
 
@@ -78,7 +72,21 @@ public abstract class Player extends java.util.Observable {
     public boolean getTurn(){return this.turn;}
 
 
+     public int getNbCoup() {
+        return nbCoup;
+    }
 
+    public void setNbCoup(int nbCoup) {
+        this.nbCoup = nbCoup;
+    }
+
+    public Grid getGrid() {
+        return mGrid;
+    }
+
+    public void setGrid(Grid mGrid) {
+        this.mGrid = mGrid;
+    }
 
 
 }

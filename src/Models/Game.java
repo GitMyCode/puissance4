@@ -23,9 +23,11 @@ public class Game {
 
     public Game(int p1, int p2, int startPlayer){
 
+        int playe1Color= (startPlayer ==1)? 0 : 1;
+        int playe2Color= (startPlayer ==2)? 0 : 1;
         this.gameState = IN_GAME;
-        player1 = (p1 == 1) ? new Ai(1) : new Human(0);
-        player2 = (p2 == 1) ? new Ai(1) : new Human(0);
+        player1 = (p1 == 1) ? new Ai(playe1Color) : new Human(playe1Color);
+        player2 = (p2 == 1) ? new Ai(playe2Color) : new Human(playe2Color);
 
         if(startPlayer==1){
             player1.setTurn(true);
@@ -66,7 +68,12 @@ public class Game {
     }
 
     public void Undo(){
-        player1.Undo();
+
+        getCurrentPlayer().Undo();
+       if(getCurrentPlayer().getClass() == Ai.class){
+            changeTurn();
+        }
+        changeTurn();
     }
 
 

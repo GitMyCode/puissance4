@@ -27,7 +27,7 @@ public class Grid extends java.util.Observable implements GridInterface {
         grid = new Square[gridToCopy.getLenght()];
         for(int i=0; i< gridToCopy.getLenght(); i++){
             grid[i] = new Square();
-            grid[i].setStatus(gridToCopy.getGrid()[i].getStatus());
+            grid[i].setStatus(gridToCopy.getSquareGrid()[i].getStatus());
         }
     }
 
@@ -189,7 +189,7 @@ public class Grid extends java.util.Observable implements GridInterface {
 
 
 
-    public Square[] getGrid() {
+    public Square[] getSquareGrid() {
         return grid;
     }
 

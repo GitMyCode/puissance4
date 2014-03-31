@@ -12,28 +12,27 @@ public class Grid extends java.util.Observable implements GridInterface {
     private int row;
     private int col;
     private Square[] grid;
-    private static Grid instance = null;
 
     public  Grid(int row, int col){
         this.row = row;
         this.col = col;
         create_grid();
-        instance = this;
     }
 
-    public Grid(Grid gridToCopy){
-        this.col = gridToCopy.getCol();
-        this.row = gridToCopy.getRow();
-        grid = new Square[gridToCopy.getLenght()];
-        for(int i=0; i< gridToCopy.getLenght(); i++){
-            grid[i] = new Square();
-            grid[i].setStatus(gridToCopy.getSquareGrid()[i].getStatus());
+    public Grid copyGrid(){
+        Grid copiedGrid = new Grid(this.row, this.col);
+
+        Square[] copiedSquares = new Square[this.grid.length];
+        for(int i=0; i< copiedGrid.getLenght(); i++){
+            copiedSquares[i] = new Square();
+            copiedSquares[i].setStatus(this.grid[i].getStatus());
         }
+        copiedGrid.setGrid(copiedSquares);
+        return copiedGrid;
     }
 
-    public static Grid getInstance(){
-
-        return instance;
+    void setGrid(Square[] squares){
+        this.grid = squares;
     }
 
     private void create_grid(){
@@ -42,30 +41,16 @@ public class Grid extends java.util.Observable implements GridInterface {
         for(int i=0; i< nb_square; i++){
             grid[i] = new Square();
         }
-        /*grid = new Square[this.row][this.col];
-        for (int i =0; i<row ; i++){
-            for(int j=0; j<col; j++){
-                grid[i][j] = new Square();
-            }
-        }
-        */
     }
 
     public void changeSquare(int index,int playerTurn){
 
         if (checkAvailibility(index)){
             this.grid[index].incrementStatus(playerTurn);
-
-/*
-            int send[] = new int[2];
-            send[0] = index;
-            send[1] = this.grid[index].getStatus();
-            setChanged();
-            notifyObservers(send);
-            */
             sendChange();
         }
     }
+
     public void sendChange(){
         int send[] = new int[this.grid.length];
         for(int i=0;i<this.grid.length;i++){
@@ -187,17 +172,12 @@ public class Grid extends java.util.Observable implements GridInterface {
     public int getCol(){return this.col;}
     public int getRow(){return this.row;}
 
-
-
-    public Square[] getSquareGrid() {
-        return grid;
+    public Memento storeInMemento(){
+        return new Memento(grid);
     }
 
-    public void setGrid(Square[] grid) {
-        this.grid = grid;
+    public void restoreFromMemento(Memento memento){
+        grid = memento.getMementoSave();
     }
 
-    public static void setInstance(Grid instance) {
-        Grid.instance = instance;
-    }
 }

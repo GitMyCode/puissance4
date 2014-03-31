@@ -10,7 +10,7 @@ public class GameFactory {
     Options mOptions;
     ViewGrid vGrid;
 
-    Grid mGrid;
+    GridInterface mGrid;
     Game mGame;
 
     public GameFactory(Options mOptions){

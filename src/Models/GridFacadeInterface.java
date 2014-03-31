@@ -3,8 +3,13 @@ package Models;
 /**
  * Created by mb on 2/23/14.
  */
-public interface GridInterface {
+public interface GridFacadeInterface {
 
+
+    void reset();
+    void saveState();
+    void loadPreviousState();
+    boolean existsPreviousState();
 
     boolean checkWin(int color);
     boolean checkAvailibility(int index);
@@ -13,8 +18,6 @@ public interface GridInterface {
     int getCol();
     int getRow();
     boolean isFull();
-    GridInterface copyGrid();
+    GridFacadeInterface copyGridFacade();
 
-    Memento storeInMemento();
-    void restoreFromMemento(Memento memento);
 }

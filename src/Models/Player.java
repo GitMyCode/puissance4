@@ -18,8 +18,6 @@ public abstract class Player extends java.util.Observable {
 
     private int nbCoup = 0;
 
-    Caretaker caretaker = new Caretaker();
-    Originator originator = new Originator();
 
 
 

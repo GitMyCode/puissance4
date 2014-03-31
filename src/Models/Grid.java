@@ -80,6 +80,14 @@ public class Grid extends java.util.Observable implements GridInterface {
         return check;
     }
 
+    public boolean isFull(){
+        for(int i=0;i<grid.length; i++){
+            if(grid[i].getStatus()== FREE)
+                return false;
+        }
+        return true;
+    }
+
     public boolean checkWin(int color){
         boolean check = false;
         check = checkHorizontal(color);
@@ -88,13 +96,7 @@ public class Grid extends java.util.Observable implements GridInterface {
 
         return check;
     }
-    public boolean isFull(){
-        for(int i=0;i<grid.length; i++){
-            if(grid[i].getStatus()== FREE)
-                return false;
-        }
-        return true;
-    }
+
 
     private boolean checkHorizontal(int color){
         boolean check = false;

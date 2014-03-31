@@ -40,7 +40,10 @@ public class Puissance4  extends JFrame{
     public Puissance4(){
 
         super("Puissance 4");
-        setSize(450,550);
+        Dimension frame_dimension = new Dimension(450,550);
+        setPreferredSize(frame_dimension);
+        setMinimumSize(frame_dimension);
+        setSize(frame_dimension);
 
         /*
         * Creer le Controller et le mettre au courant

@@ -109,7 +109,7 @@ public class ConfigurationView extends JFrame{
         groupP1type.add(p1Ai);groupP1type.add(p1Human);
         groupP2type.add(p2Ai);groupP2type.add(p2Human);
         groupTurn.add(p1Turn);groupTurn.add(p2Turn);
-        groupPlacement.add(coulisse);groupPlacement.add(coulisse);
+        groupPlacement.add(coulisse);groupPlacement.add(exact);
 
 
         setActionCommande();

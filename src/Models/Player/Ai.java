@@ -6,15 +6,23 @@ import Models.algorithme.MinMax;
  * Created by mb on 2/19/14.
  */
 public class Ai extends Player {
+
+    Strategy strategy;
+
+
     public Ai(int color ) {
         super(color);
+        strategy = new Normal();
     }
 
     @Override
     public boolean play(int index) {
-        int move =MinMax.getMove(super.mGrid);
+        int move =strategy.move(super.mGrid);
        return super.play(move);
     }
+
+    public void setStrategy(Strategy newStrategy){this.strategy = newStrategy;}
+
 
     @Override
     public boolean hasWin() {

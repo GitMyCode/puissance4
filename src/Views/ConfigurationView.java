@@ -146,7 +146,7 @@ public class ConfigurationView extends JFrame{
 
 
         addItem(configurationPanel,ok,0,7,1,1,GridBagConstraints.WEST);
-        addItem(configurationPanel,cancel,1,7,1,1,GridBagConstraints.EAST);
+        addItem(configurationPanel,cancel,2,7,1,1,GridBagConstraints.EAST);
 
 
         add(configurationPanel);

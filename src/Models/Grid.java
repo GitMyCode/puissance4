@@ -8,21 +8,25 @@ public class Grid extends java.util.Observable implements GridInterface {
     final int RED = 0;
     final int YELLOW = 1;
     final int FREE = 2;
+    final int WIN = 4;
 
     private int row;
     private int col;
+    private boolean clickAbove;
+
     private Square[] grid;
 
     private  int[] resultat = new int[4];
 
-    public  Grid(int row, int col){
+    public  Grid(int row, int col,boolean clickAbove){
         this.row = row;
         this.col = col;
+        this.clickAbove = clickAbove;
         create_grid();
     }
 
     public Grid copyGrid(){
-        Grid copiedGrid = new Grid(this.row, this.col);
+        Grid copiedGrid = new Grid(this.row, this.col, false); // le MinMax n'utilise pas coulisse
 
         Square[] copiedSquares = new Square[this.grid.length];
         for(int i=0; i< this.grid.length; i++){
@@ -46,8 +50,22 @@ public class Grid extends java.util.Observable implements GridInterface {
     }
 
     public void changeSquare(int index,int playerTurn){
-
+        int south = index + this.col;
         if (checkAvailibility(index)){
+            if(clickAbove){
+
+                System.out.println("ici");
+
+                if ( index < this.grid.length - this.col-1){ // Si pas la premiere rangé
+                    while(isInGrid(south) && grid[south].getStatus()==FREE  ){// boulce jusqu'a derniere espace libre
+                        index = south;
+                        south = index + this.col;
+                        System.out.println(" south" +south);
+                    }
+                }
+
+            }
+
             this.grid[index].incrementStatus(playerTurn);
             sendChange();
         }
@@ -63,23 +81,25 @@ public class Grid extends java.util.Observable implements GridInterface {
 
     }
 
-
     public boolean checkAvailibility(int index){
         int south = index + this.col;
         boolean check = false;
-      //  System.out.print("\nindex = " + index + "  south= " + south);
-        if(this.grid[index].getStatus() != 2){
-            check = false;
-        }
-        else if (index > this.grid.length - this.col-1){
-            check = true;
-        }else if(this.grid[south].getStatus() != 2){
-            check = true;
-        }else{
-            check = false;
-        }
 
-        return check;
+
+        if(this.grid[index].getStatus() != FREE){ //check si case disponible
+            return false;
+
+        }else if(!this.clickAbove){//Si on ne peut pas clicker au dessus
+            if (index > this.grid.length - this.col-1){ // Si premiere ranger
+                return  true;
+            }else if(this.grid[south].getStatus() != 2){ // Si la case d'en dessou est occupé
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+        return true;
     }
 
     public boolean isFull(){
@@ -100,6 +120,23 @@ public class Grid extends java.util.Observable implements GridInterface {
     }
 
 
+
+
+
+    /**********************************************
+    *
+     * PRIVATE METHODE
+    *
+    ************************************************/
+
+    /*
+    *Check if a index is in the grid;
+    * */
+    private boolean isInGrid(int index){
+        return (index >0 && index < grid.length);
+    }
+
+
     private boolean checkHorizontal(int color){
         boolean check = false;
         int count =0;
@@ -109,7 +146,7 @@ public class Grid extends java.util.Observable implements GridInterface {
             }
             if(grid[i].getStatus() == color){
                 count++;
-                check = (count == 4) ? true: false;
+                check = (count == WIN) ? true: false;
             }else{
                 count= 0;
             }
@@ -126,7 +163,7 @@ public class Grid extends java.util.Observable implements GridInterface {
                 if(grid[i].getStatus() == color){
                     resultat[count]= i;
                     count++;
-                    check = (count >= 4);
+                    check = (count >= WIN);
                 }else{
                     count= 0;
                 }
@@ -150,9 +187,9 @@ public class Grid extends java.util.Observable implements GridInterface {
         for (int i =grid.length -1 ; i >= 0 && !check; i--){
             if(grid[i].getStatus() == color){
                 count = recurs_diag(1,color,i-col+gauche,gauche);
-                if (count != 4)
+                if (count != WIN)
                     count = recurs_diag(1,color,i-col+droite,droite);
-                check = count >=4;
+                check = count >=WIN;
             }
         }
 
@@ -171,7 +208,7 @@ public class Grid extends java.util.Observable implements GridInterface {
     private int recurs_diag(int count,int color,int next,int direction){
 
         int space_border;
-        if(count == 4){
+        if(count == WIN){
             resultat[count-1] = next;
             return count;
         }

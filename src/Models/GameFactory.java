@@ -20,7 +20,7 @@ public class GameFactory {
 
     public ViewGrid createGrid(){
         vGrid = new ViewGrid(mOptions.getSizeX(),mOptions.getSizeY());
-        mGrid = new GridFacade(mOptions.getSizeX(),mOptions.getSizeY()) ;
+        mGrid = new GridFacade(mOptions.getSizeX(),mOptions.getSizeY(), mOptions.isAllowClickAbove()) ;
 
         // Lie l'oberver vGrid avec l'objet mGrid
         mGrid.addObserver(vGrid);

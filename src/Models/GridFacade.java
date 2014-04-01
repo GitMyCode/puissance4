@@ -14,8 +14,8 @@ public class GridFacade implements GridFacadeInterface {
         this.caretaker = new Caretaker();
     }
 
-    public GridFacade(int row, int col) {
-        this.grid = new Grid(row, col);
+    public GridFacade(int row, int col, boolean clickAbove) {
+        this.grid = new Grid(row, col, clickAbove);
         this.caretaker = new Caretaker();
     }
 

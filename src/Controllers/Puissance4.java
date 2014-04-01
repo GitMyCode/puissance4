@@ -25,7 +25,6 @@ public class Puissance4  extends JFrame{
    /*************************************
     *  Les views
     **************************************/
-    private ViewGrid vGrid;
     private MenuView vMenu;
     private ConfigurationView vConfiguration;
 

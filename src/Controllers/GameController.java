@@ -14,6 +14,8 @@ import Views.DialogView;
 import Views.MenuView;
 import Views.ViewGrid;
 
+import javax.xml.bind.annotation.XmlElementDecl;
+
 public class GameController implements MouseListener, ActionListener{
     /*
     *   Les actions commande pour que le controller
@@ -118,10 +120,12 @@ public class GameController implements MouseListener, ActionListener{
         vGrid.removeAll();
         vGrid=null;
         mGame=null;
-         vGrid = factory.createGrid();
+
+
+        vGrid = factory.createGrid();
         mGame = factory.createGame();
 
-       mFrame.add(vGrid);
+        mFrame.add(vGrid);
         vGrid.addController(this);
         vGrid.updateUI();
     }
@@ -234,9 +238,16 @@ public class GameController implements MouseListener, ActionListener{
                     vGrid.updateUI();
                     if(mGame.getGameState() != IN_GAME){
 
-                        String player = (mGame.getGameState()==0)? "Player 1":"Player 2";
-                        vDialog.showWin(player);
+                        if(mGame.getGameState() == 4){
+                            String full = "Game full";
+                            vDialog.showWin(full);
+                        }else{
+                            String player = (mGame.getGameState()==0)? "Player rouge":"Player jaune";
+                            vDialog.showWin(player);
+                        }
+
                     }
+
             }
         }
     }

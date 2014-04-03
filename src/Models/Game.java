@@ -59,13 +59,27 @@ public class Game {
             if(!current.play(index)){
                 break;
             }
+
+            /*
+            * N'affect que le Human, cette fonction ne change pas le ready
+            * state
+            * */
             current.setReady(false);
+
+
+
             if(current.hasWin()){
                 setGameState(current.getColor());
                 break;
+            }else if(current.getIsFull()){
+                setGameState(4);
             }
+
+
             changeTurn();
             current = getCurrentPlayer();
+
+
         }while(current.isReadyToPlay());
 
 

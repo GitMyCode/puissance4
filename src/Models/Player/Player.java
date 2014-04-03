@@ -26,6 +26,10 @@ public abstract class Player extends java.util.Observable {
         this.player_color = color;
         this.name = name;
     }
+    public boolean getIsFull(){
+
+        return getGrid().isFull();
+    }
 
     /*
     * Retourn False si la case n'est pas valide

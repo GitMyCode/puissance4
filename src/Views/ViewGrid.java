@@ -4,8 +4,9 @@ package Views;
  * Created by desk on 2/9/14.
  */
 
+import Models.GLOBAL;
+
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.Observable;
 
@@ -20,13 +21,13 @@ public class ViewGrid extends JPanel implements java.util.Observer {
     int nb_square;
     public ViewGrid(){
         setSize(200, 100);
-         }
+    }
     public ViewGrid(int row, int col){
-       super();
+        super();
         this.nb_square = row * col;
 
         //setSize(400,400);
-       //  panel = new JPanel();
+        //  panel = new JPanel();
         squares = new SquareView[nb_square];
 
         setLayout(new GridLayout(row,col));
@@ -34,6 +35,9 @@ public class ViewGrid extends JPanel implements java.util.Observer {
             squares[i] = new SquareView();
             add(squares[i]);
 
+
+
+        //    String test =GLOBAL.values();
         }
 
 
@@ -44,7 +48,7 @@ public class ViewGrid extends JPanel implements java.util.Observer {
 
     public void addController(MouseListener c){
         for(int i=0;i<nb_square; i++){
-        squares[i].addMouseListener(c);
+            squares[i].addMouseListener(c);
         }
     }
     @Override
@@ -62,7 +66,7 @@ public class ViewGrid extends JPanel implements java.util.Observer {
             }
 
         }
-       // System.out.println(t[0]);
+        // System.out.println(t[0]);
 /*
         if (t[1] == 0){
             this.squares[t[0]].setColor(Color.RED);
@@ -70,7 +74,7 @@ public class ViewGrid extends JPanel implements java.util.Observer {
             this.squares[t[0]].setColor(Color.YELLOW);
         }
         */
-       // this.squares[t[0]].setText(String.valueOf(t[1]));
+        // this.squares[t[0]].setText(String.valueOf(t[1]));
     }
 
 

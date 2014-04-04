@@ -1,4 +1,6 @@
-package Models;
+package Models.Memento;
+
+import Models.Square;
 
 /**
  * Created by MB on 3/30/14.

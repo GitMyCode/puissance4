@@ -1,6 +1,6 @@
 package Models.Player;
 
-import Models.GridFacadeInterface;
+import Models.Facades.GridFacadeInterface;
 
 /**
  * Created by MB on 4/1/2014.

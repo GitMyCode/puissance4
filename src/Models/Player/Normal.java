@@ -1,6 +1,6 @@
 package Models.Player;
 
-import Models.GridFacadeInterface;
+import Models.Facades.GridFacadeInterface;
 import Models.algorithme.MinMax;
 
 /**

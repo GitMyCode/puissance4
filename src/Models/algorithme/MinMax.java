@@ -1,6 +1,6 @@
 package Models.algorithme;
 import Models.GLOBAL;
-import Models.GridFacadeInterface;
+import Models.Facades.GridFacadeInterface;
 
 import java.util.ArrayList;
 import java.util.List;

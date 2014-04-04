@@ -22,7 +22,7 @@ public class Options {
     private void defaultOptions(){
         allowClickAbove =true;
         player1Type = GLOBAL.HUMAN;
-        player2Type = GLOBAL.AI;
+        player2Type = GLOBAL.HUMAN;
         startingPlayer = 1;
         sizeX = 7;
         sizeY = 6;

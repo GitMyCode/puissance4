@@ -9,12 +9,12 @@ import java.awt.event.MouseListener;
  * Created by desk on 2/9/14.
  */
 import Models.*;
+import Models.Commands.*;
+import Models.Facades.GridFacadeInterface;
 import Views.ConfigurationView;
 import Views.DialogView;
 import Views.MenuView;
 import Views.ViewGrid;
-
-import javax.xml.bind.annotation.XmlElementDecl;
 
 public class GameController implements MouseListener, ActionListener{
     /*
@@ -34,12 +34,13 @@ public class GameController implements MouseListener, ActionListener{
    // final int AI    = 1;
 
    private GameFactory factory;
-   //private GridFacadeInterface mGrid;
+   private GridFacadeInterface mGrid;
    private Options mOptions;
    private Game mGame;
    private Puissance4 mFrame;
 
 
+    private MenuInvoker menuInvoker;
 
     private ViewGrid vGrid;
     private MenuView vMenu;
@@ -49,10 +50,64 @@ public class GameController implements MouseListener, ActionListener{
     private DialogView vDialog = new DialogView();
 
 
-    public GameController(){
+    public GameController(Options mOptions,ConfigurationView vConf, Puissance4 mFrame){
+        this.mOptions = mOptions;
+        this.mFrame   = mFrame;
+        this.vConf =    vConf;
+        init();
+
+    }
+     /*
+        Creer  le factory et lui passer les options la reference??
+        creer la view  -> prendre la reference
+        creer la grid  -> ne PAS prendre la reference
+        creer la grame -> prendre la reference
+    * */
+
+    private void init(){
+        factory = new GameFactory(mOptions);
+        vGrid = factory.createViewGrid();
+        mGrid = factory.createModelGrid();
+
+        /*Liaison du pattron Observer entre mGrid et vGrid*/
+        mGrid.addObserver(vGrid);
+
+
+
+        mFrame.add(vGrid) ;
+        vGrid.addController(this);
+        vGrid.updateUI();
+
+
+
+        mGame = factory.createGame();
+
+
+
+
+        initMenuInvoker();
 
     }
 
+    private void initMenuInvoker(){
+        Commands configurer  = new ConfigurerCommand(mOptions,vConf);
+
+        Commands demarrer = new DemarrerCommand(mGame,mGrid,mOptions);
+
+        Commands arreter = new ArreterCommand(mGame,mGrid);
+
+        Commands annuler = new AnnulerCommand(mGame);
+
+
+
+        menuInvoker = new MenuInvoker();
+        menuInvoker.setConfigurerCommand(configurer);
+        menuInvoker.setAnnulerCommand(annuler);
+        menuInvoker.setArreterCommand(arreter);
+        menuInvoker.setDemarrerCommand(demarrer);
+
+
+    }
 
     /*************************************
     * Getter setter models
@@ -97,24 +152,7 @@ public class GameController implements MouseListener, ActionListener{
 
 
 
-    /*TODO
-        Creer  le factory et lui passer les options la reference??
-        creer la view  -> prendre la reference
-        creer la grid  -> ne PAS prendre la reference
-        creer la grame -> prendre la reference
-    * */
-    public void init(){
-        factory = new GameFactory(mOptions);
-        vGrid = factory.createGrid();
-        mGame = factory.createGame();
 
-
-
-
-        mFrame.add(vGrid) ;
-        vGrid.addController(this);
-        vGrid.updateUI();
-    }
     public void reset(){
         mFrame.remove(vGrid);
         vGrid.removeAll();
@@ -122,7 +160,7 @@ public class GameController implements MouseListener, ActionListener{
         mGame=null;
 
 
-        vGrid = factory.createGrid();
+        vGrid = factory.createViewGrid();
         mGame = factory.createGame();
 
         mFrame.add(vGrid);
@@ -136,22 +174,30 @@ public class GameController implements MouseListener, ActionListener{
         if (e.getActionCommand() == "Démarrer"){
 
 
-          if(vGrid == null){
+            menuInvoker.demarrer();
+         /* if(vGrid == null){
               init();
           }
+          */
         }else if(e.getActionCommand() == "Arrêter"){
 
-            reset();
+   //         reset();
+            menuInvoker.arreter();
 
         }else if(e.getActionCommand() == "Configurer"){
+
+
+            menuInvoker.configurer();
+            /*
             syncFromOption();
             vConf.setVisible(true);
+            */
         }
 
         else if(e.getActionCommand() == "Annuler"){
 
-               mGame.Undo();
-               vGrid.updateUI();
+            menuInvoker.annuler();
+            vGrid.updateUI();
 
         }
 

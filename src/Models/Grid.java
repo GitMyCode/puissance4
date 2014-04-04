@@ -1,6 +1,8 @@
 package Models;
 
-import Models.GLOBAL;
+import Models.Facades.GridInterface;
+import Models.Memento.Memento;
+
 /**
  * Created by desk on 2/9/14.
  */
@@ -44,6 +46,17 @@ public class Grid extends java.util.Observable implements GridInterface {
         this.grid = squares;
     }
 
+
+    public void newGrid(int row, int col,boolean clickAbove){
+        this.row = row;
+        this.col = col;
+        this.clickAbove = clickAbove;
+
+        create_grid();
+        sendChange();
+
+    }
+
     private void create_grid(){
         int nb_square = this.row * this.col;
         grid = new Square[nb_square];
@@ -82,6 +95,14 @@ public class Grid extends java.util.Observable implements GridInterface {
         setChanged();
         notifyObservers(send);
 
+    }
+
+    @Override
+    public void reset() {
+        for(int i=0; i<this.grid.length;i++){
+            this.grid[i].setStatus(GLOBAL.FREE);
+        }
+        sendChange();
     }
 
     public boolean checkAvailibility(int index){

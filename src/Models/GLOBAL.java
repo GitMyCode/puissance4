@@ -23,6 +23,14 @@ public abstract class GLOBAL {
     public static final int IN_GAME=5;
     public static final int GAME_FULL=6;
 
+   public static final String action_AI = "AI";
+   public static final String action_HUMAN = "HUMAN";
+   public static final String action_PLAYER1 = "PLAYER1";
+   public static final String action_PLAYER2 = "PLAYER2";
+   public static final String action_COULISSE= "COULISSE";
+   public static final String action_EXACT = "EXACT";
+
+
 
     /*
     AI(0,"AI"),

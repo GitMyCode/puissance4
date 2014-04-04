@@ -1,6 +1,10 @@
-package Models;
+package Models.Facades;
+
+import Models.Memento.Memento;
 
 import java.util.Observer;
+
+
 
 /**
  * Created by mb on 2/23/14.
@@ -19,6 +23,11 @@ public interface GridInterface {
 
     void changeSquare(int index,int playerTurn);
     void sendChange();
+
+    void reset();
+
+    void newGrid(int row, int col,boolean clickAbove);
+
 
     Memento storeInMemento();
     void restoreFromMemento(Memento memento);

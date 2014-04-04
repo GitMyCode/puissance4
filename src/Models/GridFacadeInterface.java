@@ -19,7 +19,6 @@ public interface GridFacadeInterface {
     boolean checkAvailibility(int index);
 
     void changeSquare(int index,int playerTurn);
-    void sendChange();
 
     int getLenght();
     int getCol();

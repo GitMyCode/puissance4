@@ -63,11 +63,6 @@ public class GridFacade implements GridFacadeInterface {
     }
 
     @Override
-    public void sendChange() {
-        this.grid.sendChange();
-    }
-
-    @Override
     public int getLenght() {
         return this.grid.getLenght();
     }

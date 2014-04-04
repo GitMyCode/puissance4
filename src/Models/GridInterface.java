@@ -18,7 +18,6 @@ public interface GridInterface {
     void addObserver(Observer observer);
 
     void changeSquare(int index,int playerTurn);
-    void sendChange();
 
     Memento storeInMemento();
     void restoreFromMemento(Memento memento);

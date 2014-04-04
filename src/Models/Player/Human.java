@@ -36,7 +36,6 @@ public class Human extends Player{
             System.out.println("Undo :"+getColor());
             nbCoup--;
             getGrid().loadPreviousState();
-            getGrid().sendChange();
         }
     }
 

@@ -30,8 +30,8 @@ public class GameController implements MouseListener, ActionListener{
 
 
     final int IN_GAME=3;
-    final int HUMAN = 0;
-    final int AI    = 1;
+  //  final int HUMAN = 0;
+   // final int AI    = 1;
 
    private GameFactory factory;
    //private GridFacadeInterface mGrid;
@@ -193,15 +193,17 @@ public class GameController implements MouseListener, ActionListener{
     public void syncFromOption(){
 
         // Pour le type du joueur 1 : AI ou Humain
+
+
         switch (mOptions.getPlayer1Type()){
-            case AI:     vConf.getGroupP1type().setSelected(vConf.getP1Ai().getModel(),true); break;
-            case HUMAN : vConf.getGroupP1type().setSelected(vConf.getP1Human().getModel(),true); break;
+            case GLOBAL.AI:     vConf.getGroupP1type().setSelected(vConf.getP1Ai().getModel(),true); break;
+            case GLOBAL.HUMAN : vConf.getGroupP1type().setSelected(vConf.getP1Human().getModel(),true); break;
         }
 
         // Pour le type du joueur 2 : Ai ou Humain
         switch (mOptions.getPlayer2Type()){
-            case AI:     vConf.getGroupP2type().setSelected(vConf.getP2Ai().getModel(),true); break;
-            case HUMAN : vConf.getGroupP2type().setSelected(vConf.getP2Human().getModel(),true); break;
+            case GLOBAL.AI:     vConf.getGroupP2type().setSelected(vConf.getP2Ai().getModel(),true); break;
+            case GLOBAL.HUMAN: vConf.getGroupP2type().setSelected(vConf.getP2Human().getModel(),true); break;
         }
 
         // Pour le joueur qui commence la partie
@@ -236,13 +238,13 @@ public class GameController implements MouseListener, ActionListener{
             if(obj == vGrid.getSquareIndex(i)){
                     mGame.play(i);
                     vGrid.updateUI();
-                    if(mGame.getGameState() != IN_GAME){
+                    if(mGame.getGameState() != GLOBAL.IN_GAME){
 
-                        if(mGame.getGameState() == 4){
+                        if(mGame.getGameState() == GLOBAL.GAME_FULL){
                             String full = "Game full";
                             vDialog.showWin(full);
                         }else{
-                            String player = (mGame.getGameState()==0)? "Player rouge":"Player jaune";
+                            String player = (mGame.getGameState()==GLOBAL.RED)? "Player rouge":"Player jaune";
                             vDialog.showWin(player);
                         }
 

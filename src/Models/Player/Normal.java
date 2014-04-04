@@ -8,7 +8,7 @@ import Models.algorithme.MinMax;
  */
 public class Normal implements Strategy{
     @Override
-    public int move(GridFacadeInterface grid) {
-        return MinMax.getMove(grid);
+    public int move(GridFacadeInterface grid,int playerColor) {
+        return MinMax.getMove(grid, playerColor);
     }
 }

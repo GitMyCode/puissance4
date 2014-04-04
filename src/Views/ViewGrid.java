@@ -31,18 +31,17 @@ public class ViewGrid extends JPanel implements java.util.Observer {
         squares = new SquareView[nb_square];
 
         setLayout(new GridLayout(row,col));
+
+
         for(int i =0; i<nb_square;i++){
+
+
             squares[i] = new SquareView();
             add(squares[i]);
 
 
 
-        //    String test =GLOBAL.values();
         }
-
-
-       /* setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);*/
 
     }
 
@@ -57,10 +56,14 @@ public class ViewGrid extends JPanel implements java.util.Observer {
 
         for(int i=0;i<t.length;i++){
             Color square_color;
-            if(t[i] == 0){
+            if(t[i] == GLOBAL.RED){
+                System.out.println("ici");
                 squares[i].setColor(Color.RED);
-            }else if(t[i] ==1){
+
+            }else if(t[i] == GLOBAL.YELLOW){
+
                 squares[i].setColor(Color.YELLOW);
+
             }else{
                 squares[i].setColor(Color.WHITE);
             }

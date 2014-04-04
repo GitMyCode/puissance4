@@ -10,7 +10,7 @@ public class Square  {
     status = 1 = jaune
     status = 2 = libre
     * */
-    int status = 2;
+    int status = GLOBAL.FREE;
     public Square(){
 
     }

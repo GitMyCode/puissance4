@@ -1,5 +1,6 @@
 package Models;
 
+import Models.GLOBAL;
 /**
  * Created by desk on 2/9/14.
  */
@@ -7,7 +8,6 @@ public class Grid extends java.util.Observable implements GridInterface {
 
     final int RED = 0;
     final int YELLOW = 1;
-    final int FREE = 2;
     final int WIN = 4;
 
     private int row;
@@ -35,6 +35,9 @@ public class Grid extends java.util.Observable implements GridInterface {
         }
         copiedGrid.setGrid(copiedSquares);
         return copiedGrid;
+
+
+
     }
 
     void setGrid(Square[] squares){
@@ -57,7 +60,7 @@ public class Grid extends java.util.Observable implements GridInterface {
                 System.out.println("ici");
 
                 if ( index < this.grid.length - this.col-1){ // Si pas la premiere rangé
-                    while(isInGrid(south) && grid[south].getStatus()==FREE  ){// boulce jusqu'a derniere espace libre
+                    while(isInGrid(south) && grid[south].getStatus()==GLOBAL.FREE){// boulce jusqu'a derniere espace libre
                         index = south;
                         south = index + this.col;
                         System.out.println(" south" +south);
@@ -86,17 +89,18 @@ public class Grid extends java.util.Observable implements GridInterface {
         boolean check = false;
 
 
-        if(this.grid[index].getStatus() != FREE){ //check si case disponible
+        if(this.grid[index].getStatus() != GLOBAL.FREE){ //check si case disponible
             return false;
 
         }else if(!this.clickAbove){//Si on ne peut pas clicker au dessus
             if (index > this.grid.length - this.col-1){ // Si premiere ranger
                 return  true;
-            }else if(this.grid[south].getStatus() != 2){ // Si la case d'en dessou est occupé
+            }else if(this.grid[south].getStatus() != GLOBAL.FREE ){ // Si la case d'en dessou est occupé
                 return true;
             }else{
                 return false;
             }
+
 
         }
         return true;
@@ -104,7 +108,7 @@ public class Grid extends java.util.Observable implements GridInterface {
 
     public boolean isFull(){
         for(int i=0;i<grid.length; i++){
-            if(grid[i].getStatus()== FREE)
+            if(grid[i].getStatus()== GLOBAL.FREE)
                 return false;
         }
         return true;

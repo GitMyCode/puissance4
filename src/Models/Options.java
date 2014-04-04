@@ -21,8 +21,8 @@ public class Options {
     }
     private void defaultOptions(){
         allowClickAbove =true;
-        player1Type = HUMAN;
-        player2Type = AI;
+        player1Type = GLOBAL.HUMAN;
+        player2Type = GLOBAL.AI;
         startingPlayer = 1;
         sizeX = 7;
         sizeY = 6;

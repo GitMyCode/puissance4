@@ -1,5 +1,7 @@
 package Views;
 
+import Models.GLOBAL;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -16,8 +18,8 @@ public class ConfigurationView extends JFrame{
     *   Humain doit etre 0
     *   AI doit etre 1
     * */
-    final String action_AI = "1";
-    final String action_HUMAN = "0";
+    final String action_AI = String.valueOf(GLOBAL.AI);
+    final String action_HUMAN = String.valueOf(GLOBAL.HUMAN) ;
     final String action_PLAYER1 = "1";
     final String action_PLAYER2 = "2";
     final String action_COULISSE= "COULISSE";

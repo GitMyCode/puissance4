@@ -11,7 +11,6 @@ public class Game {
 
     final int PLAYER_1=0;
     final int PLAYER_2=1;
-    final int IN_GAME=3;
 /*
 * 0 - player 1 won
 * 1 - player 2 won
@@ -25,11 +24,11 @@ public class Game {
 
     public Game(int p1, int p2, int startPlayer, GridFacadeInterface mGrid){
 
-        int playe1Color= (startPlayer ==1)? 0 : 1;
-        int playe2Color= (startPlayer ==2)? 0 : 1;
-        this.gameState = IN_GAME;
-        player1 = (p1 == 1) ? new Ai(playe1Color) : new Human(playe1Color);
-        player2 = (p2 == 1) ? new Ai(playe2Color) : new Human(playe2Color);
+        int playe1Color= (startPlayer ==1)? GLOBAL.RED : GLOBAL.YELLOW;
+        int playe2Color= (startPlayer ==2)? GLOBAL.RED : GLOBAL.YELLOW;
+        this.gameState = GLOBAL.IN_GAME;
+        player1 = (p1 == GLOBAL.AI) ? new Ai(playe1Color) : new Human(playe1Color);
+        player2 = (p2 == GLOBAL.AI) ? new Ai(playe2Color) : new Human(playe2Color);
 
         if(startPlayer==1){
             player1.setTurn(true);
@@ -72,7 +71,7 @@ public class Game {
                 setGameState(current.getColor());
                 break;
             }else if(current.getIsFull()){
-                setGameState(4);
+                setGameState(GLOBAL.GAME_FULL);
             }
 
 

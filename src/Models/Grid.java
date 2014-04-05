@@ -8,8 +8,6 @@ import Models.Memento.Memento;
  */
 public class Grid extends java.util.Observable implements GridInterface {
 
-    final int RED = 0;
-    final int YELLOW = 1;
     final int WIN = 4;
 
     private int row;
@@ -37,9 +35,6 @@ public class Grid extends java.util.Observable implements GridInterface {
         }
         copiedGrid.setGrid(copiedSquares);
         return copiedGrid;
-
-
-
     }
 
     void setGrid(Square[] squares){
@@ -88,10 +83,12 @@ public class Grid extends java.util.Observable implements GridInterface {
     }
 
     public void sendChange(){
-        int send[] = new int[this.grid.length];
+        int send[][] = new int[2][this.grid.length];
         for(int i=0;i<this.grid.length;i++){
-            send[i] = this.grid[i].getStatus();
+            send[0][i] = this.grid[i].getStatus();
         }
+        send[1][0] = this.row;
+        send[1][1] = this.col;
         setChanged();
         notifyObservers(send);
 

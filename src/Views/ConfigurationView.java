@@ -114,6 +114,10 @@ public class ConfigurationView extends JFrame{
         groupPlacement.add(coulisse);groupPlacement.add(exact);
 
 
+        /*
+        * Associer les ActionCommand sur les Button afin que le listener
+        * sache lequel a ete press
+        * */
         setActionCommande();
 
         /*
@@ -158,6 +162,12 @@ public class ConfigurationView extends JFrame{
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+
+
+    /*
+    * Associer les ActionCommand avec les Button afin que le actionlistener
+    * puisse savoir quel button a ete press
+    * */
     private void setActionCommande(){
 
         p1Ai.setActionCommand(action_AI);

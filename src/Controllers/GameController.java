@@ -17,21 +17,7 @@ import Views.MenuView;
 import Views.ViewGrid;
 
 public class GameController implements MouseListener, ActionListener{
-    /*
-    *   Les actions commande pour que le controller
-    *   sache  quel radio button est choisi dans la fenetre configuration
-    * */
-    final String action_AI = "AI";
-    final String action_HUMAN = "HUMAN";
-    final String action_PLAYER1 = "PLAYER1";
-    final String action_PLAYER2 = "PLAYER2";
-    final String action_COULISSE= "COULISSE";
-    final String action_EXACT = "EXACT";
 
-
-    final int IN_GAME=3;
-  //  final int HUMAN = 0;
-   // final int AI    = 1;
 
    private GameFactory factory;
    private GridFacadeInterface mGrid;
@@ -146,7 +132,6 @@ public class GameController implements MouseListener, ActionListener{
     public ConfigurationView getViewConfiguration(){return this.vConf;}
 
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
@@ -209,8 +194,6 @@ public class GameController implements MouseListener, ActionListener{
         }
     }
 
-
-
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {}
     @Override
@@ -219,6 +202,5 @@ public class GameController implements MouseListener, ActionListener{
     public void mouseEntered(MouseEvent mouseEvent) {}
     @Override
     public void mouseExited(MouseEvent mouseEvent) {}
-
 
 }

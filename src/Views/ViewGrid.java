@@ -41,16 +41,37 @@ public class ViewGrid extends JPanel implements java.util.Observer {
 
         setLayout(new GridLayout(row,col));
 
-
         for(int i =0; i<nb_square;i++){
-
-
             squares[i] = new SquareView();
             add(squares[i]);
+        }
+    }
 
+   @Override
+    public void update(Observable observable, Object o) {
+        int[][] t = (int[][]) o;
 
+        if(t[1][0] != this.row || t[1][1] != this.col){
 
         }
+
+        for(int i=0;i<t[0].length;i++){
+            Color square_color;
+            if(t[0][i] == GLOBAL.RED){
+                System.out.println("ici");
+                squares[i].setColor(Color.RED);
+
+            }else if(t[0][i] == GLOBAL.YELLOW){
+
+                squares[i].setColor(Color.YELLOW);
+
+            }else{
+                squares[i].setColor(Color.WHITE);
+            }
+        }
+   }
+
+    private void adapteNewGrid(){
 
     }
 
@@ -59,34 +80,6 @@ public class ViewGrid extends JPanel implements java.util.Observer {
             squares[i].addMouseListener(c);
         }
     }
-    @Override
-    public void update(Observable observable, Object o) {
-        int[] t = (int[]) o;
-
-
-
-
-
-        for(int i=0;i<t.length;i++){
-            Color square_color;
-            if(t[i] == GLOBAL.RED){
-                System.out.println("ici");
-                squares[i].setColor(Color.RED);
-
-            }else if(t[i] == GLOBAL.YELLOW){
-
-                squares[i].setColor(Color.YELLOW);
-
-            }else{
-                squares[i].setColor(Color.WHITE);
-            }
-
-        }
-
-
-    }
-
-
     public JPanel getSquareIndex(int index){
         return this.squares[index];
     }

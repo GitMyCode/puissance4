@@ -48,7 +48,14 @@ public class ViewGrid extends JPanel implements java.util.Observer {
         }
     }
 
-   @Override
+
+    /*
+    * t[0][]  <-- La ou ce trouve les les case de la grid a updater
+    * t[1][]  <-- t[1][0] et t[1][1] correspond au Row et Col du grid model
+    *             Si ils sont different de ceux de la view alors il ya a eu une
+    *             redimmension de la grid et il faut adapter la view en fonction
+    * */
+    @Override
     public void update(Observable observable, Object o) {
         int[][] t = (int[][]) o;
 
@@ -71,8 +78,11 @@ public class ViewGrid extends JPanel implements java.util.Observer {
                 squares[i].setColor(Color.WHITE);
             }
         }
-   }
-
+    }
+    /*
+    * Est utiliser lorsqu'on veut resize la grid dans le cas ou l'utilisateur
+    * a choisir une autre dimension dans les configuration
+    * */
     private void adapteNewGrid(int newRow, int newCol){
         this.row = newRow;
         this.col = newCol;
@@ -89,7 +99,10 @@ public class ViewGrid extends JPanel implements java.util.Observer {
         setLayout(new GridLayout(this.row,this.col));
 
     }
-
+    /*
+    * Prend la reference d'un mouse listener, l`ajoute a la view et
+    * garde la reference pour plus tard
+    * */
     public void addController(MouseListener c){
         controller = c;
         for(int i=0;i<nb_square; i++){

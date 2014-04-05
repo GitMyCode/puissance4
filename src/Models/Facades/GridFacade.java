@@ -1,4 +1,8 @@
-package Models;
+package Models.Facades;
+
+import Models.Memento.Caretaker;
+import Models.Grid;
+import Models.Memento.Memento;
 
 import java.util.Observer;
 
@@ -21,8 +25,21 @@ public class GridFacade implements GridFacadeInterface {
 
     @Override
     public void reset() {
-        Memento memento = caretaker.initialStateMemento();
-        this.grid.restoreFromMemento(memento);
+        if(existsPreviousState()){
+            Memento memento = caretaker.initialStateMemento();
+            this.grid.restoreFromMemento(memento);
+
+        }
+
+        /*
+        * Apres avoir vider le memento on vite la grid aussi
+        * */
+        this.grid.reset();
+    }
+
+    @Override
+    public void newGrid(int row, int col, boolean clickAbove) {
+        this.grid.newGrid(row,col,clickAbove);
     }
 
     @Override
@@ -35,6 +52,8 @@ public class GridFacade implements GridFacadeInterface {
     public void loadPreviousState() {
         Memento memento = this.caretaker.getMemento();
         this.grid.restoreFromMemento(memento);
+
+        this.grid.sendChange();
     }
 
     @Override

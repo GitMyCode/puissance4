@@ -1,13 +1,13 @@
 package Models;
 
+import Models.Facades.GridInterface;
+import Models.Memento.Memento;
+
 /**
  * Created by desk on 2/9/14.
  */
 public class Grid extends java.util.Observable implements GridInterface {
 
-    final int RED = 0;
-    final int YELLOW = 1;
-    final int FREE = 2;
     final int WIN = 4;
 
     private int row;
@@ -41,6 +41,17 @@ public class Grid extends java.util.Observable implements GridInterface {
         this.grid = squares;
     }
 
+
+    public void newGrid(int row, int col,boolean clickAbove){
+        this.row = row;
+        this.col = col;
+        this.clickAbove = clickAbove;
+
+        create_grid();
+        sendChange();
+
+    }
+
     private void create_grid(){
         int nb_square = this.row * this.col;
         grid = new Square[nb_square];
@@ -57,7 +68,7 @@ public class Grid extends java.util.Observable implements GridInterface {
                 System.out.println("ici");
 
                 if ( index < this.grid.length - this.col-1){ // Si pas la premiere rangé
-                    while(isInGrid(south) && grid[south].getStatus()==FREE  ){// boulce jusqu'a derniere espace libre
+                    while(isInGrid(south) && grid[south].getStatus()==GLOBAL.FREE){// boulce jusqu'a derniere espace libre
                         index = south;
                         south = index + this.col;
                         System.out.println(" south" +south);
@@ -71,22 +82,43 @@ public class Grid extends java.util.Observable implements GridInterface {
         }
     }
 
+    public void sendChange(){
+        int send[][] = new int[2][this.grid.length];
+        for(int i=0;i<this.grid.length;i++){
+            send[0][i] = this.grid[i].getStatus();
+        }
+        send[1][0] = this.row;
+        send[1][1] = this.col;
+        setChanged();
+        notifyObservers(send);
+
+    }
+
+    @Override
+    public void reset() {
+        for(int i=0; i<this.grid.length;i++){
+            this.grid[i].setStatus(GLOBAL.FREE);
+        }
+        sendChange();
+    }
+
     public boolean checkAvailibility(int index){
         int south = index + this.col;
         boolean check = false;
 
 
-        if(this.grid[index].getStatus() != FREE){ //check si case disponible
+        if(this.grid[index].getStatus() != GLOBAL.FREE){ //check si case disponible
             return false;
 
         }else if(!this.clickAbove){//Si on ne peut pas clicker au dessus
             if (index > this.grid.length - this.col-1){ // Si premiere ranger
                 return  true;
-            }else if(this.grid[south].getStatus() != 2){ // Si la case d'en dessou est occupé
+            }else if(this.grid[south].getStatus() != GLOBAL.FREE ){ // Si la case d'en dessou est occupé
                 return true;
             }else{
                 return false;
             }
+
 
         }
         return true;
@@ -94,7 +126,7 @@ public class Grid extends java.util.Observable implements GridInterface {
 
     public boolean isFull(){
         for(int i=0;i<grid.length; i++){
-            if(grid[i].getStatus()== FREE)
+            if(grid[i].getStatus()== GLOBAL.FREE)
                 return false;
         }
         return true;
@@ -110,23 +142,6 @@ public class Grid extends java.util.Observable implements GridInterface {
     }
 
 
-    public int getLenght(){
-        return this.row * this.col;
-    }
-    public int getCol(){return this.col;}
-    public int getRow(){return this.row;}
-
-    public Memento storeInMemento(){
-        return new Memento(grid);
-    }
-
-    public void restoreFromMemento(Memento memento){
-
-        grid = memento.getMementoSave();
-        this.sendChange();
-
-    }
-
 
 
 
@@ -141,18 +156,6 @@ public class Grid extends java.util.Observable implements GridInterface {
     * */
     private boolean isInGrid(int index){
         return (index >0 && index < grid.length);
-    }
-
-
-
-    private void sendChange(){
-        int send[] = new int[this.grid.length];
-        for(int i=0;i<this.grid.length;i++){
-            send[i] = this.grid[i].getStatus();
-        }
-        setChanged();
-        notifyObservers(send);
-
     }
 
 
@@ -249,5 +252,19 @@ public class Grid extends java.util.Observable implements GridInterface {
         return count;
     }
 
+
+    public int getLenght(){
+        return this.row * this.col;
+    }
+    public int getCol(){return this.col;}
+    public int getRow(){return this.row;}
+
+    public Memento storeInMemento(){
+        return new Memento(grid);
+    }
+
+    public void restoreFromMemento(Memento memento){
+        grid = memento.getMementoSave();
+    }
 
 }

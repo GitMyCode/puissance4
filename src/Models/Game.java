@@ -1,5 +1,6 @@
 package Models;
 
+import Models.Facades.GridFacadeInterface;
 import Models.Player.Ai;
 import Models.Player.Human;
 import Models.Player.Player;
@@ -11,26 +12,64 @@ public class Game {
 
     final int PLAYER_1=0;
     final int PLAYER_2=1;
-    final int IN_GAME=3;
 /*
 * 0 - player 1 won
 * 1 - player 2 won
 * 3 - not finish
 * */
-    int gameState;
-    Player player1;
-    Player player2;
+    private int gameState;
+    private int startPlayer;
+    private Player player1;
+    private Player player2;
+    private GridFacadeInterface mGrid;
+
+
 
 
 
     public Game(int p1, int p2, int startPlayer, GridFacadeInterface mGrid){
 
-        int playe1Color= (startPlayer ==1)? 0 : 1;
-        int playe2Color= (startPlayer ==2)? 0 : 1;
-        this.gameState = IN_GAME;
-        player1 = (p1 == 1) ? new Ai(playe1Color) : new Human(playe1Color);
-        player2 = (p2 == 1) ? new Ai(playe2Color) : new Human(playe2Color);
+        this.startPlayer = startPlayer;
+        this.mGrid = mGrid;
 
+
+        int playe1Color= (startPlayer ==1)? GLOBAL.RED : GLOBAL.YELLOW;
+        int playe2Color= (startPlayer ==2)? GLOBAL.RED : GLOBAL.YELLOW;
+        this.gameState = GLOBAL.IN_GAME;
+        player1 = (p1 == GLOBAL.AI) ? new Ai(playe1Color) : new Human(playe1Color);
+        player2 = (p2 == GLOBAL.AI) ? new Ai(playe2Color) : new Human(playe2Color);
+
+        player1.setGrid(mGrid);
+        player2.setGrid(mGrid);
+
+       initTurn();
+    }
+
+    public void newGame(int p1, int p2, int startPlayer){
+        this.startPlayer = startPlayer;
+
+
+        int playe1Color= (startPlayer ==1)? GLOBAL.RED : GLOBAL.YELLOW;
+        int playe2Color= (startPlayer ==2)? GLOBAL.RED : GLOBAL.YELLOW;
+        this.gameState = GLOBAL.IN_GAME;
+        player1 = (p1 == GLOBAL.AI) ? new Ai(playe1Color) : new Human(playe1Color);
+        player2 = (p2 == GLOBAL.AI) ? new Ai(playe2Color) : new Human(playe2Color);
+
+        player1.setGrid(mGrid);
+        player2.setGrid(mGrid);
+
+        initTurn();
+
+    }
+
+
+    private void initPlayer(){
+
+    }
+
+    private void initTurn(){
+
+        gameState = GLOBAL.IN_GAME;
         if(startPlayer==1){
             player1.setTurn(true);
             player2.setTurn(false);
@@ -38,19 +77,18 @@ public class Game {
             player1.setTurn(false);
             player2.setTurn(true);
         }
-        player1.setGrid(mGrid);
-        player2.setGrid(mGrid);
 
-
-        // Un check pour savoir si le Ai doit jouer en premier
         if(getCurrentPlayer().getClass() == Ai.class){
             System.out.println("Ai premier");
             getCurrentPlayer().play(38); // l'index donner au AI n'a pas d'importance il ne s'en sert pas
             changeTurn();
         }
+
     }
 
-
+    /*
+    * PLAY
+    * */
     public void play(int index){
         Player current = getCurrentPlayer();
         do{
@@ -59,15 +97,35 @@ public class Game {
             if(!current.play(index)){
                 break;
             }
+
+            /*
+            * N'affect que le Human, cette fonction ne change pas le ready
+            * state
+            * */
             current.setReady(false);
+
+
+
             if(current.hasWin()){
                 setGameState(current.getColor());
                 break;
+            }else if(current.getIsFull()){
+                setGameState(GLOBAL.GAME_FULL);
             }
+
+
             changeTurn();
             current = getCurrentPlayer();
+
+
         }while(current.isReadyToPlay());
 
+
+    }
+
+
+    public void reset(){
+        initTurn();
 
     }
 

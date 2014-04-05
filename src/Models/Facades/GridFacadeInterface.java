@@ -1,4 +1,4 @@
-package Models;
+package Models.Facades;
 
 import java.util.Observer;
 
@@ -9,6 +9,7 @@ public interface GridFacadeInterface {
 
 
     void reset();
+    void newGrid(int row, int col,boolean clickAbove);
     void saveState();
     void loadPreviousState();
     boolean existsPreviousState();

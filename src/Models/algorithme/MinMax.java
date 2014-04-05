@@ -1,6 +1,6 @@
 package Models.algorithme;
-import Models.Grid;
-import Models.GridFacadeInterface;
+import Models.GLOBAL;
+import Models.Facades.GridFacadeInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,17 @@ import java.util.List;
 public class MinMax {
 
 
-final static  int HUMAN = 0;
-final static  int AI    = 1;
 
+    static int current_player;
+    static int opponent;
 
-    public static int getMove(GridFacadeInterface grid){
+    public static int getMove(GridFacadeInterface grid,int playerColor){
 
-        int[] play = minmax(grid,5,AI,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        /* Si le joueur est rouge alors son opposent est Jaune*/
+        opponent = (playerColor == GLOBAL.RED)? GLOBAL.YELLOW : GLOBAL.RED;
+        current_player = playerColor;
+
+        int[] play = minmax(grid,5, current_player,Integer.MIN_VALUE,Integer.MAX_VALUE);
         return play[0];
     }
 
@@ -27,11 +31,11 @@ final static  int AI    = 1;
 
 
 
-       int score= (evaluer(grid, player));
+        int score= (evaluer(grid, player));
         if(score != 0 || grid.isFull() || depth == 0){
-           // System.out.print("-------------" +
-             //       "\n" + score);
-           // grid1.show();
+            // System.out.print("-------------" +
+            //       "\n" + score);
+            // grid1.show();
             int test =0;
             test = (score >0) ? depth : (test -depth);
             return new int[] {0,score + test} ;
@@ -46,37 +50,37 @@ final static  int AI    = 1;
             bestScore = evaluer(grid1);
             return  new int[] {bestMove,bestScore};
         }*/
-           for(int move : nextMove){
-                GridFacadeInterface newGrid = grid.copyGridFacade();
-                newGrid.changeSquare(move,player);
-                if(player == AI){
-                    currentScore = minmax(newGrid,depth-1,HUMAN, alpha,beta)[1];
-                    if(currentScore > alpha){
-                        alpha = currentScore;
-                        bestMove = move;
+        for(int move : nextMove){
+            GridFacadeInterface newGrid = grid.copyGridFacade();
+            newGrid.changeSquare(move,player);
+            if(player == current_player ){
+                currentScore = minmax(newGrid,depth-1, opponent, alpha,beta)[1];
+                if(currentScore > alpha){
+                    alpha = currentScore;
+                    bestMove = move;
 
-                        for(int i=0;i<depth;i++){
-                            //System.out.print("  ");
-                        }
-                        //System.out.println("                      AI:"+ move);
+                    for(int i=0;i<depth;i++){
+                        //System.out.print("  ");
                     }
-                }else {
-                    currentScore = minmax(newGrid,depth-1,AI,alpha,beta)[1];
-                    if(currentScore < beta){
-                        beta = currentScore;
-                        bestMove = move;
-                        for(int i=0;i<depth;i++){
-                            //System.out.print("  ");
-                        }
-                        //System.out.println("                      P:"+ move);
-                    }
-
+                    //System.out.println("                      GLOBAL.AI:"+ move);
                 }
+            }else {
+                currentScore = minmax(newGrid,depth-1,current_player,alpha,beta)[1];
+                if(currentScore < beta){
+                    beta = currentScore;
+                    bestMove = move;
+                    for(int i=0;i<depth;i++){
+                        //System.out.print("  ");
+                    }
+                    //System.out.println("                      P:"+ move);
+                }
+
+            }
             // reset la case?
-           }
+        }
 
 
-        return new int[] {bestMove, ((player == AI)? alpha: beta)};
+        return new int[] {bestMove, ((player == current_player)? alpha: beta)};
 
     }
 
@@ -92,7 +96,7 @@ final static  int AI    = 1;
 
     private static int evaluer(GridFacadeInterface grid,int turn){
         if(grid.checkWin(turn)){
-            if(turn==HUMAN){
+            if(turn== opponent){
                 return -10;
             }else{
                 return 10;

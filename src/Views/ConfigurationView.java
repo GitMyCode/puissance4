@@ -1,5 +1,7 @@
 package Views;
 
+import Models.GLOBAL;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -16,8 +18,8 @@ public class ConfigurationView extends JFrame{
     *   Humain doit etre 0
     *   AI doit etre 1
     * */
-    final String action_AI = "1";
-    final String action_HUMAN = "0";
+    final String action_AI = String.valueOf(GLOBAL.AI);
+    final String action_HUMAN = String.valueOf(GLOBAL.HUMAN) ;
     final String action_PLAYER1 = "1";
     final String action_PLAYER2 = "2";
     final String action_COULISSE= "COULISSE";
@@ -112,6 +114,10 @@ public class ConfigurationView extends JFrame{
         groupPlacement.add(coulisse);groupPlacement.add(exact);
 
 
+        /*
+        * Associer les ActionCommand sur les Button afin que le listener
+        * sache lequel a ete press
+        * */
         setActionCommande();
 
         /*
@@ -156,6 +162,12 @@ public class ConfigurationView extends JFrame{
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+
+
+    /*
+    * Associer les ActionCommand avec les Button afin que le actionlistener
+    * puisse savoir quel button a ete press
+    * */
     private void setActionCommande(){
 
         p1Ai.setActionCommand(action_AI);

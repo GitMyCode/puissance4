@@ -17,7 +17,7 @@ public class Ai extends Player {
 
     @Override
     public boolean play(int index) {
-        int move =strategy.move(super.mGrid);
+        int move =strategy.move(super.mGrid,getColor());
        return super.play(move);
     }
 

@@ -1,5 +1,5 @@
 package Models.Player;
-import Models.*;
+import Models.Facades.GridFacadeInterface;
 
 
 /**
@@ -25,6 +25,10 @@ public abstract class Player extends java.util.Observable {
     public Player(int color){
         this.player_color = color;
         this.name = name;
+    }
+    public boolean getIsFull(){
+
+        return getGrid().isFull();
     }
 
     /*

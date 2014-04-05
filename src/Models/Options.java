@@ -9,7 +9,6 @@ public class Options {
     final int AI    = 1;
 
 
-
     boolean allowClickAbove;
     int player1Type;
     int player2Type;
@@ -17,16 +16,13 @@ public class Options {
     int sizeX;
     int sizeY;
 
-
-
-
     public Options(){
        defaultOptions();
     }
     private void defaultOptions(){
-        allowClickAbove =false;
-        player1Type = HUMAN;
-        player2Type = AI;
+        allowClickAbove =true;
+        player1Type = GLOBAL.HUMAN;
+        player2Type = GLOBAL.HUMAN;
         startingPlayer = 1;
         sizeX = 7;
         sizeY = 6;

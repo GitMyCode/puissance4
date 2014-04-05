@@ -48,9 +48,11 @@ public class Puissance4  extends JFrame{
         * Creer le Controller et le mettre au courant
         * des Options
         * */
-        cGameController = new GameController();
+
         mOptions = new Options();
-        cGameController.addModelOption(mOptions);
+
+        ConfigurationView config = new ConfigurationView();
+        cGameController = new GameController(mOptions,config,this);
 
 
         /**
@@ -68,15 +70,13 @@ public class Puissance4  extends JFrame{
         * Creer la vue pour les configuration et faire la liaison
         * avec le Controller
         * */
-        ConfigurationView config = new ConfigurationView();
-        cGameController.addViewConfiguration(config);
         config.addController(cGameController);
 
         /**
         * Je dois passer la referance du Jframe afin que le cGameController
         * puisse ajouter les views qu'il cree au Jframe
         * */
-        cGameController.addFrame(this);
+       // cGameController.addFrame(this);
 
 
 

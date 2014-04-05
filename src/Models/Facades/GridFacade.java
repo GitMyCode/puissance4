@@ -52,6 +52,8 @@ public class GridFacade implements GridFacadeInterface {
     public void loadPreviousState() {
         Memento memento = this.caretaker.getMemento();
         this.grid.restoreFromMemento(memento);
+
+        this.grid.sendChange();
     }
 
     @Override

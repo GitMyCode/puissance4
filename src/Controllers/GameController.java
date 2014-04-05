@@ -57,12 +57,6 @@ public class GameController implements MouseListener, ActionListener{
         init();
 
     }
-     /*
-        Creer  le factory et lui passer les options la reference??
-        creer la view  -> prendre la reference
-        creer la grid  -> ne PAS prendre la reference
-        creer la grame -> prendre la reference
-    * */
 
     private void init(){
         factory = new GameFactory(mOptions);
@@ -81,8 +75,6 @@ public class GameController implements MouseListener, ActionListener{
 
 
         mGame = factory.createGame();
-
-
 
 
         initMenuInvoker();
@@ -111,10 +103,6 @@ public class GameController implements MouseListener, ActionListener{
         menuInvoker.setDemarrerCommand(demarrer);
         menuInvoker.setAccepterConfigCommand(ok);
         menuInvoker.setAnnulerConfigCommand(cancel);
-
-
-
-
     }
 
     /*************************************
@@ -159,23 +147,6 @@ public class GameController implements MouseListener, ActionListener{
 
 
 
-/*
-
-    public void reset(){
-        mFrame.remove(vGrid);
-        vGrid.removeAll();
-        vGrid=null;
-        mGame=null;
-
-
-        vGrid = factory.createViewGrid();
-        mGame = factory.createGame();
-
-        mFrame.add(vGrid);
-        vGrid.addController(this);
-        vGrid.updateUI();
-    }*/
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
@@ -183,31 +154,20 @@ public class GameController implements MouseListener, ActionListener{
 
 
             menuInvoker.demarrer();
-         /* if(vGrid == null){
-              init();
-          }
-          */
-        }else if(e.getActionCommand() == "Arrêter"){
+       }else if(e.getActionCommand() == "Arrêter"){
 
-   //         reset();
             menuInvoker.arreter();
 
         }else if(e.getActionCommand() == "Configurer"){
 
 
             menuInvoker.configurer();
-            /*
-            syncFromOption();
-            vConf.setVisible(true);
-            */
         }
 
         else if(e.getActionCommand() == "Annuler"){
 
             menuInvoker.annuler();
-
         }
-
 
         else if(e.getActionCommand()== "Ok"){
 
@@ -219,67 +179,6 @@ public class GameController implements MouseListener, ActionListener{
         }
 
     }
-    /*
-    * Prend les nouvelles configuration et les sauvegarde dans les options
-    * */
-
-/*     public void syncToOption(){
-
-        //Set l'option avec le action_commande du button selectionner dans le buttonGroup
-        mOptions.setPlayer1Type(Integer.parseInt(vConf.getSlectedButton(vConf.getGroupP1type())));
-        mOptions.setPlayer2Type(Integer.parseInt(vConf.getSlectedButton(vConf.getGroupP2type())));
-
-        mOptions.setStartingPlayer(Integer.parseInt(vConf.getSlectedButton(vConf.getGroupTurn())));
-
-        mOptions.setSizeX(Integer.parseInt(vConf.getRow().getText()));
-        mOptions.setSizeY(Integer.parseInt(vConf.getCol().getText()));
-
-        boolean clickAbove = (vConf.getSlectedButton(vConf.getGroupPlacement())==action_COULISSE);
-        mOptions.setAllowClickAbove(clickAbove);
-//        System.out.println(vConf.getSlectedButton(vConf.getGroupTurn()));
-    }
-
-*/
-    /*
-    * Va chercher les données dans mOptions et synchronise la vue Configuration
-    * sur ces données vers vConf
-    * */
-  /*  public void syncFromOption(){
-
-        // Pour le type du joueur 1 : AI ou Humain
-
-
-        switch (mOptions.getPlayer1Type()){
-            case GLOBAL.AI:     vConf.getGroupP1type().setSelected(vConf.getP1Ai().getModel(),true); break;
-            case GLOBAL.HUMAN : vConf.getGroupP1type().setSelected(vConf.getP1Human().getModel(),true); break;
-        }
-
-        // Pour le type du joueur 2 : Ai ou Humain
-        switch (mOptions.getPlayer2Type()){
-            case GLOBAL.AI:     vConf.getGroupP2type().setSelected(vConf.getP2Ai().getModel(),true); break;
-            case GLOBAL.HUMAN: vConf.getGroupP2type().setSelected(vConf.getP2Human().getModel(),true); break;
-        }
-
-        // Pour le joueur qui commence la partie
-        switch (mOptions.getStartingPlayer()){
-            case 1: vConf.getGroupTurn().setSelected(vConf.getP1Turn().getModel(),true); break;
-            case 2: vConf.getGroupTurn().setSelected(vConf.getP2Turn().getModel(),true); break;
-        }
-
-        // La taille de la grille
-        vConf.getRow().setText(String.valueOf(mOptions.getSizeX()));
-        vConf.getCol().setText(String.valueOf(mOptions.getSizeY()));
-
-        // Si on peut clicker au dessu ou doit etre exact
-        if(mOptions.isAllowClickAbove()){
-            vConf.getGroupPlacement().setSelected(vConf.getCoulisse().getModel(),true);
-        }else{
-            vConf.getGroupPlacement().setSelected(vConf.getExact().getModel(),true);
-        }
-
-
-    }
-*/
 
     /*
     * Est appeler lorsque l'utilisateur click sur la grille
@@ -291,8 +190,9 @@ public class GameController implements MouseListener, ActionListener{
         Object obj = mouseEvent.getSource();
         for(int i=0;i< vGrid.getNbSquare();i++){
             if(obj == vGrid.getSquareIndex(i)){
+
                     mGame.play(i);
-                    vGrid.updateUI();
+
                     if(mGame.getGameState() != GLOBAL.IN_GAME){
 
                         if(mGame.getGameState() == GLOBAL.GAME_FULL){

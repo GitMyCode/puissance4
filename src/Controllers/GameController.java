@@ -139,6 +139,7 @@ public class GameController implements MouseListener, ActionListener{
 
 
             menuInvoker.demarrer();
+            vGrid.updateUI();
        }else if(e.getActionCommand() == "Arrêter"){
 
             menuInvoker.arreter();
@@ -172,6 +173,7 @@ public class GameController implements MouseListener, ActionListener{
     public void mousePressed(MouseEvent mouseEvent) {
 
 
+        System.out.println(" event");
         Object obj = mouseEvent.getSource();
         for(int i=0;i< vGrid.getNbSquare();i++){
             if(obj == vGrid.getSquareIndex(i)){

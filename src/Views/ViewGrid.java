@@ -24,6 +24,7 @@ public class ViewGrid extends JPanel implements java.util.Observer {
     private int row;
     private int col;
 
+    MouseListener controller;
 
     public ViewGrid(){
         setSize(200, 100);
@@ -52,7 +53,8 @@ public class ViewGrid extends JPanel implements java.util.Observer {
         int[][] t = (int[][]) o;
 
         if(t[1][0] != this.row || t[1][1] != this.col){
-
+            System.out.println(" okey");
+            adapteNewGrid(t[1][0],t[1][1]);
         }
 
         for(int i=0;i<t[0].length;i++){
@@ -71,11 +73,25 @@ public class ViewGrid extends JPanel implements java.util.Observer {
         }
    }
 
-    private void adapteNewGrid(){
+    private void adapteNewGrid(int newRow, int newCol){
+        this.row = newRow;
+        this.col = newCol;
+        this.nb_square = newRow*newCol;
+        removeAll();
+        this.squares = new SquareView[newRow*newCol];
+
+        for(int i =0; i<squares.length;i++){
+            squares[i] = new SquareView();
+            add(squares[i]);
+            squares[i].addMouseListener(controller);
+        }
+
+        setLayout(new GridLayout(this.row,this.col));
 
     }
 
     public void addController(MouseListener c){
+        controller = c;
         for(int i=0;i<nb_square; i++){
             squares[i].addMouseListener(c);
         }

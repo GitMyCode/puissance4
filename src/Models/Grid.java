@@ -82,17 +82,6 @@ public class Grid extends java.util.Observable implements GridInterface {
         }
     }
 
-    public void sendChange(){
-        int send[][] = new int[2][this.grid.length];
-        for(int i=0;i<this.grid.length;i++){
-            send[0][i] = this.grid[i].getStatus();
-        }
-        send[1][0] = this.row;
-        send[1][1] = this.col;
-        setChanged();
-        notifyObservers(send);
-
-    }
 
     @Override
     public void reset() {
@@ -141,6 +130,21 @@ public class Grid extends java.util.Observable implements GridInterface {
         return check;
     }
 
+    public int getLenght(){
+        return this.row * this.col;
+    }
+    public int getCol(){return this.col;}
+    public int getRow(){return this.row;}
+
+    public Memento storeInMemento(){
+        return new Memento(grid);
+    }
+
+    public void restoreFromMemento(Memento memento){
+        grid = memento.getMementoSave();
+        this.sendChange();
+    }
+
 
 
 
@@ -158,6 +162,19 @@ public class Grid extends java.util.Observable implements GridInterface {
         return (index >0 && index < grid.length);
     }
 
+
+
+    private void sendChange(){
+        int send[][] = new int[2][this.grid.length];
+        for(int i=0;i<this.grid.length;i++){
+            send[0][i] = this.grid[i].getStatus();
+        }
+        send[1][0] = this.row;
+        send[1][1] = this.col;
+        setChanged();
+        notifyObservers(send);
+
+    }
 
     private boolean checkHorizontal(int color){
         boolean check = false;
@@ -253,18 +270,6 @@ public class Grid extends java.util.Observable implements GridInterface {
     }
 
 
-    public int getLenght(){
-        return this.row * this.col;
-    }
-    public int getCol(){return this.col;}
-    public int getRow(){return this.row;}
 
-    public Memento storeInMemento(){
-        return new Memento(grid);
-    }
-
-    public void restoreFromMemento(Memento memento){
-        grid = memento.getMementoSave();
-    }
 
 }

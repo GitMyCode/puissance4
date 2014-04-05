@@ -39,6 +39,7 @@ public class GridFacade implements GridFacadeInterface {
 
     @Override
     public void newGrid(int row, int col, boolean clickAbove) {
+        this.caretaker = new Caretaker();
         this.grid.newGrid(row,col,clickAbove);
     }
 
@@ -52,8 +53,6 @@ public class GridFacade implements GridFacadeInterface {
     public void loadPreviousState() {
         Memento memento = this.caretaker.getMemento();
         this.grid.restoreFromMemento(memento);
-
-        this.grid.sendChange();
     }
 
     @Override

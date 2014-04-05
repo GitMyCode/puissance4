@@ -22,7 +22,6 @@ public class DemarrerCommand implements Commands {
     }
     @Override
     public void executer() {
-        mGrid.reset();
         mGrid.newGrid(mOptions.getSizeX(),mOptions.getSizeY(),mOptions.isAllowClickAbove());
 
         mGame.newGame(mOptions.getPlayer1Type(),

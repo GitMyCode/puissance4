@@ -9,6 +9,8 @@ public class MenuInvoker {
     Commands configurerCommand;
     Commands arreterCommand;
     Commands annulerCommand;
+    Commands accepterConfigCommand;
+    Commands annulerConfigCommand;
 
     public MenuInvoker(){
     }
@@ -24,6 +26,12 @@ public class MenuInvoker {
     }
     public void annuler(){
         annulerCommand.executer();
+    }
+    public void accepterConfig(){
+        accepterConfigCommand.executer();
+    }
+    public void annulerConfig(){
+        annulerConfigCommand.executer();
     }
 
 
@@ -42,6 +50,15 @@ public class MenuInvoker {
     }
 
     public void setAnnulerCommand(Commands annulerCommand) {
+
         this.annulerCommand = annulerCommand;
+    }
+
+    public void setAccepterConfigCommand(Commands accepterConfigCommand) {
+        this.accepterConfigCommand = accepterConfigCommand;
+    }
+
+    public void setAnnulerConfigCommand(Commands annulerConfigCommand) {
+        this.annulerConfigCommand = annulerConfigCommand;
     }
 }

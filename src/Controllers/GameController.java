@@ -98,6 +98,10 @@ public class GameController implements MouseListener, ActionListener{
 
         Commands annuler = new AnnulerCommand(mGame);
 
+        Commands ok = new AccepterConfigCommand(mOptions,vConf );
+
+        Commands cancel = new AnnulerConfigCommand(vConf);
+
 
 
         menuInvoker = new MenuInvoker();
@@ -105,6 +109,10 @@ public class GameController implements MouseListener, ActionListener{
         menuInvoker.setAnnulerCommand(annuler);
         menuInvoker.setArreterCommand(arreter);
         menuInvoker.setDemarrerCommand(demarrer);
+        menuInvoker.setAccepterConfigCommand(ok);
+        menuInvoker.setAnnulerConfigCommand(cancel);
+
+
 
 
     }
@@ -151,7 +159,7 @@ public class GameController implements MouseListener, ActionListener{
 
 
 
-
+/*
 
     public void reset(){
         mFrame.remove(vGrid);
@@ -166,7 +174,7 @@ public class GameController implements MouseListener, ActionListener{
         mFrame.add(vGrid);
         vGrid.addController(this);
         vGrid.updateUI();
-    }
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -197,25 +205,25 @@ public class GameController implements MouseListener, ActionListener{
         else if(e.getActionCommand() == "Annuler"){
 
             menuInvoker.annuler();
-            vGrid.updateUI();
 
         }
 
 
         else if(e.getActionCommand()== "Ok"){
 
-            syncToOption();
-            vConf.setVisible(false);
+            menuInvoker.accepterConfig();
+
         }else if ( e.getActionCommand()== "Cancel"){
 
-            vConf.setVisible(false);
+            menuInvoker.annulerConfig();
         }
 
     }
     /*
     * Prend les nouvelles configuration et les sauvegarde dans les options
     * */
-    public void syncToOption(){
+
+/*     public void syncToOption(){
 
         //Set l'option avec le action_commande du button selectionner dans le buttonGroup
         mOptions.setPlayer1Type(Integer.parseInt(vConf.getSlectedButton(vConf.getGroupP1type())));
@@ -231,12 +239,12 @@ public class GameController implements MouseListener, ActionListener{
 //        System.out.println(vConf.getSlectedButton(vConf.getGroupTurn()));
     }
 
-
+*/
     /*
     * Va chercher les données dans mOptions et synchronise la vue Configuration
     * sur ces données vers vConf
     * */
-    public void syncFromOption(){
+  /*  public void syncFromOption(){
 
         // Pour le type du joueur 1 : AI ou Humain
 
@@ -269,8 +277,9 @@ public class GameController implements MouseListener, ActionListener{
             vConf.getGroupPlacement().setSelected(vConf.getExact().getModel(),true);
         }
 
-    }
 
+    }
+*/
 
     /*
     * Est appeler lorsque l'utilisateur click sur la grille

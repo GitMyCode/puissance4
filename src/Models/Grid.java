@@ -265,6 +265,7 @@ public class Grid extends java.util.Observable implements GridInterface {
 
     public void restoreFromMemento(Memento memento){
         grid = memento.getMementoSave();
+        sendChange();
     }
 
 }

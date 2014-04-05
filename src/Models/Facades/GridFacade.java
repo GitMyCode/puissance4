@@ -53,7 +53,6 @@ public class GridFacade implements GridFacadeInterface {
         Memento memento = this.caretaker.getMemento();
         this.grid.restoreFromMemento(memento);
 
-        this.grid.sendChange();
     }
 
     @Override

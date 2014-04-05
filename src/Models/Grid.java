@@ -130,21 +130,6 @@ public class Grid extends java.util.Observable implements GridInterface {
         return check;
     }
 
-    public int getLenght(){
-        return this.row * this.col;
-    }
-    public int getCol(){return this.col;}
-    public int getRow(){return this.row;}
-
-    public Memento storeInMemento(){
-        return new Memento(grid);
-    }
-
-    public void restoreFromMemento(Memento memento){
-        grid = memento.getMementoSave();
-        this.sendChange();
-    }
-
 
 
 
@@ -270,6 +255,18 @@ public class Grid extends java.util.Observable implements GridInterface {
     }
 
 
+    public int getLenght(){
+        return this.row * this.col;
+    }
+    public int getCol(){return this.col;}
+    public int getRow(){return this.row;}
 
+    public Memento storeInMemento(){
+        return new Memento(grid);
+    }
+
+    public void restoreFromMemento(Memento memento){
+        grid = memento.getMementoSave();
+    }
 
 }

@@ -11,6 +11,7 @@ import Views.DialogView;
 import Views.MenuView;
 import Views.ViewGrid;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -148,7 +149,12 @@ public class GameController implements MouseListener, ActionListener{
             vGrid.updateUI();
        }else if(e.getActionCommand() == "Arrêter"){
 
-            menuInvoker.arreter();
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Voulez-vous sauvegarder le jeu?", "Dialogue de sauvgarde", JOptionPane.YES_OPTION);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                System.out.println(" test");
+            }
+
+                menuInvoker.arreter();
 
         }else if(e.getActionCommand() == "Configurer"){
 
@@ -170,7 +176,6 @@ public class GameController implements MouseListener, ActionListener{
             menuInvoker.annulerConfig();
         }else
         if(e.getActionCommand() == "Ouvrir"){
-            System.out.println(" test");
         }
 
     }

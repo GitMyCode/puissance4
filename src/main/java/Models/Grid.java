@@ -159,7 +159,7 @@ public class Grid extends java.util.Observable implements GridInterface {
         for(int i = 0; i<mementoSquares.length; i++){
             JSONObject jsonSquare = (JSONObject) squaresList.get(i);
             Square currentSquare = new Square();
-            currentSquare.setStatus(Integer.parseInt((String) jsonSquare.get("squareStatus")));
+            currentSquare.setStatus(((Long)(jsonSquare.get("squareStatus"))).intValue());
             mementoSquares[i] = currentSquare;
         }
 

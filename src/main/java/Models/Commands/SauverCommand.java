@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * Created by MB on 4/4/2014.
  */
-public class SauverCommand implements Commands {
+public class SauverCommand implements PathCommands{
 
 
     Game mGame;
@@ -22,7 +22,6 @@ public class SauverCommand implements Commands {
 
     public SauverCommand(Game mGame){
         this.mGame = mGame;
-        this.path = "/tmp/test.json";
     }
 
 
@@ -39,5 +38,10 @@ public class SauverCommand implements Commands {
             try {writer.close();} catch (Exception ex) {}
         }
 
+    }
+
+    @Override
+    public void setPath(String path) {
+        this.path = path;
     }
 }

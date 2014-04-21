@@ -51,10 +51,9 @@ public class GridFacade implements GridFacadeInterface {
     public void restoreFromJSONObject(JSONObject jsonObject) {
         this.caretaker = new Caretaker();
 
-        int row = Integer.parseInt((String) jsonObject.get("rows"));
-        int col = Integer.parseInt((String) jsonObject.get("cols"));
-        //TODO
-        boolean clickAbove = true;
+        int row = ((Long)(jsonObject.get("rows"))).intValue();
+        int col = ((Long)(jsonObject.get("cols"))).intValue();
+        boolean clickAbove = (Boolean) jsonObject.get("clickAbove");
 
         this.grid.newGrid(row,col,clickAbove);
 

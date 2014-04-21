@@ -67,10 +67,11 @@ public class Game {
     }
 
     public void restoreFromJSONObject(JSONObject jsonObject){
-        this.startPlayer = Integer.parseInt((String) jsonObject.get("startPlayer"));
-        int p1 = Integer.parseInt((String) jsonObject.get("player1Type"));
-        int p2 = Integer.parseInt((String) jsonObject.get("player2Type"));
-        int currentPlayer = Integer.parseInt((String) jsonObject.get("currentPlayer"));
+        this.startPlayer = ((Long)(jsonObject.get("startPlayer"))).intValue();
+        System.out.println("StartPlayer : " + this.startPlayer);
+        int p1 = ((Long)(jsonObject.get("player1Type"))).intValue();
+        int p2 = ((Long)(jsonObject.get("player2Type"))).intValue();
+        int currentPlayer = ((Long)(jsonObject.get("currentPlayer"))).intValue();
 
 
 
@@ -96,13 +97,16 @@ public class Game {
     }
 
     public String getJSONSaveString(){
-        //TODO
+        //TODO use players instead of grid directly
         JSONObject jsonSave = new JSONObject();
-        jsonSave.put("player1Type", "");
-        jsonSave.put("player2Type", "");
+        int p1 = player1 instanceof Ai ? (GLOBAL.AI) : GLOBAL.HUMAN;
+        int p2 = player2 instanceof Ai ? (GLOBAL.AI) : GLOBAL.HUMAN;
+        int currentPlayer = player1.getTurn() ? 0 : 1;
+        jsonSave.put("player1Type", p1);
+        jsonSave.put("player2Type", p2);
 
         jsonSave.put("startPlayer", this.startPlayer);
-        jsonSave.put("currentPlayer", "");
+        jsonSave.put("currentPlayer", currentPlayer);
 
         mGrid.saveToJSON(jsonSave);
 

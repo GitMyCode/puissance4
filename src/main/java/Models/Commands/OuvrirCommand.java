@@ -14,7 +14,7 @@ import java.util.Iterator;
 /**
  * Created by MB on 4/4/2014.
  */
-public class OuvrirCommand implements Commands {
+public class OuvrirCommand implements PathCommands {
 
 
     Game mGame;
@@ -24,7 +24,6 @@ public class OuvrirCommand implements Commands {
     public OuvrirCommand(Game mGame, GridFacadeInterface mGrid){
         this.mGame = mGame;
         this.mGrid = mGrid;
-        this.path = "/tmp/test.json";
     }
 
 
@@ -33,20 +32,14 @@ public class OuvrirCommand implements Commands {
         mGame.reset();
         mGrid.reset();
         JSONParser parser = new JSONParser();
-
+        System.out.println("Path:" + this.path);
         try {
 
             //Object obj = parser.parse(new FileReader("c:\\test.json"));
             Object obj = parser.parse(new FileReader(path));
-
             JSONObject jsonObject = (JSONObject) obj;
-
+            System.out.println("Json string:  " + jsonObject.toJSONString());
             mGame.restoreFromJSONObject(jsonObject);
-            String name = (String) jsonObject.get("name");
-            System.out.println(name);
-
-            long age = (Long) jsonObject.get("age");
-            System.out.println(age);
 
             // loop array
             JSONArray msg = (JSONArray) jsonObject.get("messages");
@@ -62,5 +55,10 @@ public class OuvrirCommand implements Commands {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setPath(String path) {
+        this.path = path;
     }
 }

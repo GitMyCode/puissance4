@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Path2D;
 
 /**
  * Created by desk on 2/9/14.
@@ -85,7 +86,9 @@ public class GameController implements MouseListener, ActionListener{
 
         Commands cancel = new AnnulerConfigCommand(vConf);
 
-        Commands ouvrir = new OuvrirCommand(mGame,mGrid);
+        PathCommands ouvrir = new OuvrirCommand(mGame,mGrid);
+
+        PathCommands sauver = new SauverCommand(mGame);
 
 
         menuInvoker = new MenuInvoker();
@@ -96,6 +99,7 @@ public class GameController implements MouseListener, ActionListener{
         menuInvoker.setAccepterConfigCommand(ok);
         menuInvoker.setAnnulerConfigCommand(cancel);
         menuInvoker.setOuvrirCommand(ouvrir);
+        menuInvoker.setSauverCommand(sauver);
     }
 
     /*************************************
@@ -151,7 +155,8 @@ public class GameController implements MouseListener, ActionListener{
 
             int dialogResult = JOptionPane.showConfirmDialog(null, "Voulez-vous sauvegarder le jeu?", "Dialogue de sauvgarde", JOptionPane.YES_OPTION);
             if(dialogResult == JOptionPane.YES_OPTION){
-                System.out.println(" test");
+                String path  = JOptionPane.showInputDialog("À quel endroit le jeu devrait-il enregistrer votre partie?");
+                menuInvoker.sauver(path);
             }
 
                 menuInvoker.arreter();
@@ -176,6 +181,8 @@ public class GameController implements MouseListener, ActionListener{
             menuInvoker.annulerConfig();
         }else
         if(e.getActionCommand() == "Ouvrir"){
+            String path  = JOptionPane.showInputDialog("À quel endroit la partie est-elle enregistrée?");
+            menuInvoker.ouvrir(path);
         }
 
     }

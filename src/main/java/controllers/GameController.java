@@ -84,6 +84,7 @@ public class GameController implements MouseListener, ActionListener{
 
         Commands cancel = new AnnulerConfigCommand(vConf);
 
+        Commands ouvrir = new OuvrirCommand(mGame,mGrid);
 
 
         menuInvoker = new MenuInvoker();
@@ -93,6 +94,7 @@ public class GameController implements MouseListener, ActionListener{
         menuInvoker.setDemarrerCommand(demarrer);
         menuInvoker.setAccepterConfigCommand(ok);
         menuInvoker.setAnnulerConfigCommand(cancel);
+        menuInvoker.setOuvrirCommand(ouvrir);
     }
 
     /*************************************
@@ -166,6 +168,9 @@ public class GameController implements MouseListener, ActionListener{
         }else if ( e.getActionCommand()== "Cancel"){
 
             menuInvoker.annulerConfig();
+        }else
+        if(e.getActionCommand() == "Ouvrir"){
+            System.out.println(" test");
         }
 
     }

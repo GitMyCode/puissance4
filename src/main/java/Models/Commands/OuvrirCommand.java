@@ -41,12 +41,8 @@ public class OuvrirCommand implements PathCommands {
             System.out.println("Json string:  " + jsonObject.toJSONString());
             mGame.restoreFromJSONObject(jsonObject);
 
-            // loop array
-            JSONArray msg = (JSONArray) jsonObject.get("messages");
-            Iterator<String> iterator = msg.iterator();
-            while (iterator.hasNext()) {
-                System.out.println(iterator.next());
-            }
+            this.mGrid.restoreFromJSONObject(jsonObject);
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

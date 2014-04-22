@@ -20,14 +20,17 @@ public class SauverCommand implements PathCommands{
     GridFacadeInterface mGrid;
     String path;
 
-    public SauverCommand(Game mGame){
+    public SauverCommand(Game mGame, GridFacadeInterface mGrid){
         this.mGame = mGame;
+        this.mGrid = mGrid;
     }
 
 
     @Override
     public void executer() {
-        String jsonSave = mGame.getJSONSaveString();
+        JSONObject jsonSave = mGame.getJSONSaveString();
+        jsonSave = mGrid.saveToJSON(jsonSave);
+
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(this.path, "UTF-8");

@@ -88,7 +88,7 @@ public class GameController implements MouseListener, ActionListener{
 
         PathCommands ouvrir = new OuvrirCommand(mGame,mGrid);
 
-        PathCommands sauver = new SauverCommand(mGame);
+        PathCommands sauver = new SauverCommand(mGame, mGrid);
 
 
         menuInvoker = new MenuInvoker();

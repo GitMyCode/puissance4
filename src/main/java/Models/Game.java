@@ -81,8 +81,6 @@ public class Game {
         player1 = (p1 == GLOBAL.AI) ? new Ai(playe1Color) : new Human(playe1Color);
         player2 = (p2 == GLOBAL.AI) ? new Ai(playe2Color) : new Human(playe2Color);
 
-
-        this.mGrid.restoreFromJSONObject(jsonObject);
         player1.setGrid(mGrid);
         player2.setGrid(mGrid);
 
@@ -96,8 +94,7 @@ public class Game {
 
     }
 
-    public String getJSONSaveString(){
-        //TODO use players instead of grid directly
+    public JSONObject getJSONSaveString(){
         JSONObject jsonSave = new JSONObject();
         int p1 = player1 instanceof Ai ? (GLOBAL.AI) : GLOBAL.HUMAN;
         int p2 = player2 instanceof Ai ? (GLOBAL.AI) : GLOBAL.HUMAN;
@@ -108,9 +105,7 @@ public class Game {
         jsonSave.put("startPlayer", this.startPlayer);
         jsonSave.put("currentPlayer", currentPlayer);
 
-        mGrid.saveToJSON(jsonSave);
-
-        return jsonSave.toJSONString();
+        return jsonSave;
     }
 
     private void initPlayer(){

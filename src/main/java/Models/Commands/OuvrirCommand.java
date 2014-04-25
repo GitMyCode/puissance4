@@ -49,9 +49,10 @@ public class OuvrirCommand implements Commands {
                     Object obj = parser.parse(new FileReader(path));
                     JSONObject jsonObject = (JSONObject) obj;
                     System.out.println("Json string:  " + jsonObject.toJSONString());
-                    mGame.restoreFromJSONObject(jsonObject);
 
                     this.mGrid.restoreFromJSONObject(jsonObject);
+                    mGame.restoreFromJSONObject(jsonObject);
+
 
 
                 } catch (FileNotFoundException e) {

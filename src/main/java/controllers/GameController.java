@@ -179,6 +179,7 @@ public class GameController implements MouseListener, ActionListener{
         }else
         if(e.getActionCommand() == "Ouvrir"){
             menuInvoker.ouvrir();
+            vGrid.updateUI();
         }
 
     }

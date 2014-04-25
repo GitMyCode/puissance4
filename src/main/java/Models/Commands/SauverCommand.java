@@ -32,17 +32,11 @@ public class SauverCommand implements Commands{
     @Override
     public void executer() {
 
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Voulez-vous sauvegarder le jeu?", "Dialogue de sauvgarde", JOptionPane.YES_OPTION);
-        if(dialogResult == JOptionPane.YES_OPTION){
-            /*JFrame frame = new JFrame();
-            frame.setSize(200,200);
-            final JFileChooser fc = new JFileChooser();
-            fc.showOpenDialog(frame);
-*/
+        path = null;
+        path = askPathToSave();
 
-            String path  = JOptionPane.showInputDialog("À quel endroit le jeu devrait-il enregistrer votre partie?");
-            if(path != null && !("".equals(path))){// test si path pas vide ou si cancel
-                JSONObject jsonSave = mGame.getJSONSaveString();
+        if(path!=null){
+             JSONObject jsonSave = mGame.getJSONSaveString();
                 jsonSave = mGrid.saveToJSON(jsonSave);
 
                 PrintWriter writer = null;
@@ -55,11 +49,21 @@ public class SauverCommand implements Commands{
                     try {writer.close();} catch (Exception ex) {}
                 }
 
-            }
+        }
 
-            }
+    }
 
 
+
+    private String askPathToSave(){
+        path = null;
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Voulez-vous sauvegarder le jeu?", "Dialogue de sauvgarde", JOptionPane.YES_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION) {
+
+            path  = JOptionPane.showInputDialog("À quel endroit le jeu devrait-il enregistrer votre partie?");
+
+        }
+       return path;
     }
 
     public void setPath(String path) {

@@ -41,9 +41,7 @@ public class SauverCommand implements Commands{
 */
 
             String path  = JOptionPane.showInputDialog("À quel endroit le jeu devrait-il enregistrer votre partie?");
-            path = "c:\\test.json";
             if(path != null && !("".equals(path))){// test si path pas vide ou si cancel
-                System.out.println("test");
                 JSONObject jsonSave = mGame.getJSONSaveString();
                 jsonSave = mGrid.saveToJSON(jsonSave);
 

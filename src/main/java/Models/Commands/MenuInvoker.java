@@ -11,8 +11,8 @@ public class MenuInvoker {
     Commands annulerCommand;
     Commands accepterConfigCommand;
     Commands annulerConfigCommand;
-    PathCommands ouvrirCommand;
-    PathCommands sauverCommand;
+    Commands ouvrirCommand;
+    Commands sauverCommand;
 
     public MenuInvoker(){
     }
@@ -29,12 +29,10 @@ public class MenuInvoker {
     public void annuler(){
         annulerCommand.executer();
     }
-    public void sauver(String path){
-        sauverCommand.setPath(path);
+    public void sauver(){
         sauverCommand.executer();
     }
-    public void ouvrir(String path){
-        ouvrirCommand.setPath(path);
+    public void ouvrir(){
         ouvrirCommand.executer();
     }
     public void accepterConfig(){
@@ -74,11 +72,11 @@ public class MenuInvoker {
         this.annulerConfigCommand = annulerConfigCommand;
     }
 
-    public void setOuvrirCommand(PathCommands ouvrirCommand){
+    public void setOuvrirCommand(Commands ouvrirCommand){
         this.ouvrirCommand = ouvrirCommand;
     }
 
-    public void setSauverCommand(PathCommands sauverCommand) {
+    public void setSauverCommand(Commands sauverCommand) {
 
         this.sauverCommand = sauverCommand;
     }

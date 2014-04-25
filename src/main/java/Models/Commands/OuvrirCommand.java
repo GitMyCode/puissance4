@@ -6,6 +6,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +16,7 @@ import java.util.Iterator;
 /**
  * Created by MB on 4/4/2014.
  */
-public class OuvrirCommand implements PathCommands {
+public class OuvrirCommand implements Commands {
 
 
     Game mGame;
@@ -33,27 +35,37 @@ public class OuvrirCommand implements PathCommands {
         mGrid.reset();
         JSONParser parser = new JSONParser();
         System.out.println("Path:" + this.path);
-        try {
 
-            //Object obj = parser.parse(new FileReader("c:\\test.json"));
-            Object obj = parser.parse(new FileReader(path));
-            JSONObject jsonObject = (JSONObject) obj;
-            System.out.println("Json string:  " + jsonObject.toJSONString());
-            mGame.restoreFromJSONObject(jsonObject);
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Voulez-vous charger la dernière sauvegarde?", "Dialogue de sauvgarde", JOptionPane.YES_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION) {
 
-            this.mGrid.restoreFromJSONObject(jsonObject);
+            String path = JOptionPane.showInputDialog("À quel la partie est enregistrer?");
+            path = "c:\\test.json";
+            if (path != null && !("".equals(path))) {// test si path pas vide ou si cancel
+                try {
+
+                    System.out.println("ici");
+                    //Object obj = parser.parse(new FileReader("c:\\test.json"));
+                    Object obj = parser.parse(new FileReader(path));
+                    JSONObject jsonObject = (JSONObject) obj;
+                    System.out.println("Json string:  " + jsonObject.toJSONString());
+                    mGame.restoreFromJSONObject(jsonObject);
+
+                    this.mGrid.restoreFromJSONObject(jsonObject);
 
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
     }
 
-    @Override
     public void setPath(String path) {
         this.path = path;
     }

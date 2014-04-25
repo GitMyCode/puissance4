@@ -86,9 +86,9 @@ public class GameController implements MouseListener, ActionListener{
 
         Commands cancel = new AnnulerConfigCommand(vConf);
 
-        PathCommands ouvrir = new OuvrirCommand(mGame,mGrid);
+        Commands ouvrir = new OuvrirCommand(mGame,mGrid);
 
-        PathCommands sauver = new SauverCommand(mGame, mGrid);
+        Commands sauver = new SauverCommand(mGame, mGrid);
 
 
         menuInvoker = new MenuInvoker();
@@ -151,15 +151,12 @@ public class GameController implements MouseListener, ActionListener{
 
             menuInvoker.demarrer();
             vGrid.updateUI();
-       }else if(e.getActionCommand() == "Arrêter"){
+        }else if(e.getActionCommand() == "Arrêter"){
 
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Voulez-vous sauvegarder le jeu?", "Dialogue de sauvgarde", JOptionPane.YES_OPTION);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                String path  = JOptionPane.showInputDialog("À quel endroit le jeu devrait-il enregistrer votre partie?");
-                menuInvoker.sauver(path);
-            }
 
-                menuInvoker.arreter();
+
+            menuInvoker.sauver();
+            menuInvoker.arreter();
 
         }else if(e.getActionCommand() == "Configurer"){
 
@@ -181,8 +178,7 @@ public class GameController implements MouseListener, ActionListener{
             menuInvoker.annulerConfig();
         }else
         if(e.getActionCommand() == "Ouvrir"){
-            String path  = JOptionPane.showInputDialog("À quel endroit la partie est-elle enregistrée?");
-            menuInvoker.ouvrir(path);
+            menuInvoker.ouvrir();
         }
 
     }

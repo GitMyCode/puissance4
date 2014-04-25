@@ -48,20 +48,10 @@ public class Game {
        initTurn();
     }
 
+
+
     public void newGame(int p1, int p2, int startPlayer){
-        this.startPlayer = startPlayer;
-
-
-        int playe1Color= (startPlayer ==1)? GLOBAL.RED : GLOBAL.YELLOW;
-        int playe2Color= (startPlayer ==2)? GLOBAL.RED : GLOBAL.YELLOW;
-
-        this.gameState = GLOBAL.IN_GAME;
-        player1 = (p1 == GLOBAL.AI) ? new Ai(playe1Color) : new Human(playe1Color);
-        player2 = (p2 == GLOBAL.AI) ? new Ai(playe2Color) : new Human(playe2Color);
-
-        player1.setGrid(mGrid);
-        player2.setGrid(mGrid);
-
+        prepareGame(p1,p2,startPlayer);
         initTurn();
 
     }
@@ -72,6 +62,19 @@ public class Game {
         int p1 = ((Long)(jsonObject.get("player1Type"))).intValue();
         int p2 = ((Long)(jsonObject.get("player2Type"))).intValue();
         int currentPlayer = ((Long)(jsonObject.get("currentPlayer"))).intValue();
+
+
+        prepareGame(p1,p2,startPlayer);
+        player1.setGrid(mGrid);
+        player2.setGrid(mGrid);
+
+        if(currentPlayer==GLOBAL.RED){
+            player1.setTurn(true);
+            player2.setTurn(false);
+        }else{
+            player1.setTurn(false);
+            player2.setTurn(true);
+        }/*
 
 
 
@@ -91,14 +94,14 @@ public class Game {
             player1.setTurn(false);
             player2.setTurn(true);
         }
-
+*/
     }
 
     public JSONObject getJSONSaveString(){
         JSONObject jsonSave = new JSONObject();
         int p1 = player1 instanceof Ai ? (GLOBAL.AI) : GLOBAL.HUMAN;
         int p2 = player2 instanceof Ai ? (GLOBAL.AI) : GLOBAL.HUMAN;
-        int currentPlayer = player1.getTurn() ? 0 : 1;
+        int currentPlayer = getCurrentPlayer().getColor();
         jsonSave.put("player1Type", p1);
         jsonSave.put("player2Type", p2);
 
@@ -106,6 +109,22 @@ public class Game {
         jsonSave.put("currentPlayer", currentPlayer);
 
         return jsonSave;
+    }
+
+    private void prepareGame(int p1,int p2, int startPlayer){
+          this.startPlayer = startPlayer;
+
+
+        int playe1Color= (startPlayer ==1)? GLOBAL.RED : GLOBAL.YELLOW;
+        int playe2Color= (startPlayer ==2)? GLOBAL.RED : GLOBAL.YELLOW;
+
+        this.gameState = GLOBAL.IN_GAME;
+        player1 = (p1 == GLOBAL.AI) ? new Ai(playe1Color) : new Human(playe1Color);
+        player2 = (p2 == GLOBAL.AI) ? new Ai(playe2Color) : new Human(playe2Color);
+
+        player1.setGrid(mGrid);
+        player2.setGrid(mGrid);
+
     }
 
     private void initPlayer(){

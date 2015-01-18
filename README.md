@@ -1,9 +1,15 @@
 puissance4
 ==========
 
-TP genie2
+Travail Pratique cours INF5153 (Génie 2)
 
-memento facade strategy factory
 
-Save apres jouer si tu est computer
-Save apres jouer si tu est humain et que le prochain est humain
+### Designs patterns implémentés
+ * Memento
+ * Facade
+ * Strategy
+ * Factory
+ * Command
+ * 
+ 
+Le main est dans le fichier : puissance4\src\main\java\controllers\Puissance4.java

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Maven: commons-logging:commons-logging:1.1.1">
+    <archive path="/Users/swordgard/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+  </library>
+  <library name="Maven: org.springframework:spring:2.5.6">
+    <archive path="/Users/swordgard/.m2/repository/org/springframework/spring/2.5.6/spring-2.5.6.jar" />
+  </library>
+</eclipse-userlibraries>
+

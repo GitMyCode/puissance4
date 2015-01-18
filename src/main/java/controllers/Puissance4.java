@@ -19,7 +19,7 @@ public class Puissance4  extends JFrame{
 
 
    /*************************************
-    * Les models
+    * Les Models
     **************************************/
     private Options mOptions;
 
@@ -91,58 +91,6 @@ public class Puissance4  extends JFrame{
         Puissance4 puissance4 = new Puissance4();
 
 
-/*
-        frame = new JFrame("Puissance 4");
-        frame.setSize(400,400);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        //Cree le model mGrid
-        Grid model_grid = new Grid(6,7);
-        //Cree la view sur mGrid
-
-
-        ViewGrid view_grid = new ViewGrid(6,7);
-
-        MenuView menuView = new MenuView();
-        menuView.setSize(20,10);
-
-
-
-        frame.add(menuView, BorderLayout.SOUTH);
-        frame.add(view_grid,BorderLayout.CENTER);
-
-        frame.add(view_grid);
-
-
-
-        //Le model est observer par la view
-        model_grid.addObserver(view_grid);
-
-
-        //On cree maintenant le controller
-        GameController gameController = new GameController();
-        gameController.addModelGrid(model_grid); // lui passer le model
-        gameController.addView(view_grid);// lui passer la vue
-        view_grid.addController(gameController);
-
-
-        //TODO Game devrait etre creer par le controller
-        Options options = new Options();
-        Game game = new Game(0,"Player1",0,"Player2",1);
-        gameController.addModelGame(game);
-
-
-
-        gameController.addViewMenu(menuView);
-        gameController.addModelOption(options);
-        menuView.addController(gameController);
-
-
-
-
-
-
-*/
     }
 
 }

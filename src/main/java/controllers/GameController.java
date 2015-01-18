@@ -103,7 +103,7 @@ public class GameController implements MouseListener, ActionListener{
     }
 
     /*************************************
-    * Getter setter models
+    * Getter setter Models
     **************************************/
     /*public void addModelGrid(GridFacadeInterface g){
         this.mGrid = g;

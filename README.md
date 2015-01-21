@@ -1,5 +1,7 @@
 puissance4
 ==========
+![Alt text](p4.gif?raw=true)
+
 
 Travail Pratique cours INF5153 (Génie 2)
 
